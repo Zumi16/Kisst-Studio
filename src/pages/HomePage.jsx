@@ -1,12 +1,12 @@
 import { Header } from "../components/Header";
 import './HomePage.css'
-import ProductsGrid from "./ProductsGrid";
+import ProductGrid from "./ProductGrid";
 function HomePage() {
     return (
         <>
             <Header />
             <div className="home-page">
-                <ProductsGrid/>
+                <ProductGrid/>
             </div>
         </>
     )

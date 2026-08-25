@@ -16,13 +16,14 @@ export function Header() {
             </div>
             <div className='sub-header'>
                 <div className='left-section'>
-                    <p>All Categories</p>
-                    <p>Featured</p>
+                    <p>All Categories Dropdown</p>
+                    <p>Featured/Sort Dropdown</p>
+                    <p>Price Slider</p>
                     <p>In stock only</p>
+                    <p>Clear All</p>
                 </div>
                 <div className='right-section'>
                     <input className='search-bar' placeholder='Search'/>
-                    <p>Total Cart Price</p>
                 </div>
             </div>
             <div className='result-header'>
