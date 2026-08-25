@@ -1,0 +1,13 @@
+.home-page {
+    margin: 50px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.product-sample {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    background: gainsboro;
+}

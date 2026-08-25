@@ -1,0 +1,39 @@
+import './Header.css'
+import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
+
+export function Header() {
+
+    return (
+        <header>
+            <div className="main-header">
+                <div className='left-section'>
+                    <img className='logo' src='images/logo-white.png' />
+                </div>
+                <div className='right-section'>
+                    <ShoppingCartOutlinedIcon fontSize='large' />
+                    <p>Cart</p>
+                </div>
+            </div>
+            <div className='sub-header'>
+                <div className='left-section'>
+                    <p>All Categories</p>
+                    <p>Featured</p>
+                    <p>In stock only</p>
+                </div>
+                <div className='right-section'>
+                    <input className='search-bar' placeholder='Search'/>
+                    <p>Total Cart Price</p>
+                </div>
+            </div>
+            <div className='result-header'>
+                <p>Showing 0 out of 0 products.</p>
+                <div className='category-selected'>
+                    <p>Category 1</p>
+                    <p>Category 2</p>
+                </div>
+            </div>
+        </header>
+    )
+}
+
+export default Header;
