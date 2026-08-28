@@ -1,13 +1,24 @@
 .home-page {
-    margin: 50px;
+    padding: 50px;
+}
+
+.product-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap: 30px;
 }
 
-.product-sample {
-    padding: 20px;
+.product {
+    padding: 15px;
     display: flex;
     flex-direction: column;
     background: gainsboro;
+    border: 1px solid rgb(190, 190, 190);
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+.product:hover {
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4);
+  transform: translateY(-4px); 
 }

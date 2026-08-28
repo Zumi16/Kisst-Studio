@@ -1,24 +1,30 @@
+import Modal from "../components/Modal";
 
-
-export function ProductGrid() {
+export function ProductGrid({ products, selectedId, setSelected }) {
     return (
-        <>
-            <div className="product-sample">
-                <div>Image</div>
-                <h1>title</h1>
-                <p>details</p>
-                <p>price</p>
-                <p>Stock</p>
-                <p>Add to cart</p>
-            </div>
-            <div className="product-sample">
-                <div>Image</div>
-                <h1>title</h1>
-                <p>details</p>
-                <p>price</p>
-            </div>
+        <div className="product-grid">
+            {products.map((product) => {
+                return (
+                    <div className="product" key={product.id} onClick={() => setSelected(product)}>
+                        <img src={product.thumbnail} />
+                        <h1>{product.title}</h1>
+                        {/* <p>Description: {product.description}</p> */}
+                        <p>Category: {product.category}</p>
+                        <p>Rating: {product.rating}</p>
+                        <p>Price: {product.price}</p>
+                        <p>Stock: {product.stock}</p>
+                        <p>Add to cart</p>
+                    </div>
+                )
+            })}
 
-        </>
+            {selectedId && (
+                <Modal 
+                    selectedId={selectedId} 
+                    setSelected={setSelected}
+                />
+            )}
+        </div>
     )
 }
 

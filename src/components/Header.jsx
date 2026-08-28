@@ -1,7 +1,7 @@
 import './Header.css'
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 
-export function Header() {
+export function Header({ products, total }) {
 
     return (
         <header>
@@ -27,7 +27,7 @@ export function Header() {
                 </div>
             </div>
             <div className='result-header'>
-                <p>Showing 0 out of 0 products.</p>
+                <p>Showing {products.length} out of {total} products.</p>
                 <div className='category-selected'>
                     <p>Category 1</p>
                     <p>Category 2</p>
