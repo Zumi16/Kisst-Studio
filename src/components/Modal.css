@@ -14,6 +14,60 @@
   background: white;
   padding: 20px;
   border-radius: 10px;
-  max-width: 400px;
+  max-width: 700px;
   width: 100%;
+  max-height: 85vh; 
+  overflow: auto;
+  clip-path: inset(0 round 10px); 
+}
+
+.detail-head img{
+  max-width: 300px;
+  width: 100%;
+  margin: auto;
+}
+
+/* Images */
+.images-container {
+  display: flex;
+  align-items: center;
+  position: relative;
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.images-window {
+  overflow: hidden;
+  width: 100%;
+}
+
+.images-track {
+  display: flex;
+  width: 100%;
+  transition: transform 0.4s ease-in-out;
+}
+.images-card {
+  min-width: calc(100% / 1);
+  box-sizing: border-box;
+  padding: 8px; 
+}
+.images-card img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  border-radius: 4px;
+}
+.prev-btn, .next-btn {
+  padding: 10px 15px;
+  background-color: #333;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  z-index: 10;
+}
+
+.prev-btn:disabled, .next-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
