@@ -1,4 +1,5 @@
 import { useState } from "react";
+import './ProductDetail.css'
 
 export function ProductDetail({ selectedId }) {
     const [currentIndex, setCurrentIndex] = useState(0);
@@ -18,7 +19,7 @@ export function ProductDetail({ selectedId }) {
             <div className="detail-head">
                 {/* gawing component not finished*/}
                 <div className="images-container">
-                    <button className="next-btn" onClick={previousSlide}>Previous</button>
+                    { currentIndex > 0 && <button className="prev-btn" onClick={previousSlide}> ❮ </button>}
                     <div className="images-window">
                         <div className="images-track" style={{ transform: `translateX(-${currentIndex * (100 / 1)}%)` }}>
                             {selectedId.images.map((image, index) => {
@@ -30,12 +31,13 @@ export function ProductDetail({ selectedId }) {
                             })}
                         </div>
                     </div>
-                    <button className="next-btn" onClick={nextSlide}>Next</button>
+                    {currentIndex < maxIndex && <button className="next-btn" onClick={nextSlide}> ❯ </button>}
                 </div>
-                <div>
+                <div className="product-info">
                     <h1>{selectedId.title}</h1>
-                    <p>Rating: {selectedId.rating} Reviews: {selectedId.reviews.length}</p>
-                    <p>{getStockStatus} - {selectedId.stock}</p>
+                    <p>Rating: {selectedId.rating} ({selectedId.reviews.length} reviews)</p>
+                    <p>${selectedId.price}</p>
+                    <p>{getStockStatus} - {selectedId.stock} left!</p>
                 </div>
             </div>
             <div className="detail-body">
