@@ -6,6 +6,7 @@ export function Modal({ selectedId, setSelected }) {
         <div className="modal-overlay" onClick={() => setSelected(false)}>
             <div className="product-modal" onClick={(e) => e.stopPropagation()}>           
                 <ProductDetail selectedId={selectedId}/>
+                <button className='close-btn' onClick={() => setSelected(false)}>Close</button>
             </div>
         </div>
     )

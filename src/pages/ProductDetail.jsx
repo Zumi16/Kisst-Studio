@@ -1,10 +1,13 @@
 import { useState } from "react";
 import './ProductDetail.css'
 
+
 export function ProductDetail({ selectedId }) {
     const [currentIndex, setCurrentIndex] = useState(0);
     const maxIndex = selectedId.images.length - 1;
     const getStockStatus = selectedId.status === 0 ? "No Stock" : "In stock"
+    const [quantity, setQuantity] = useState(1);
+    const maxQuantity = 10;
 
     const nextSlide = () => {
         if (currentIndex < maxIndex) setCurrentIndex(currentIndex + 1);
@@ -13,13 +16,24 @@ export function ProductDetail({ selectedId }) {
     const previousSlide = () => {
         if (currentIndex > 0) setCurrentIndex(currentIndex - 1);
     }
-    console.log(selectedId)
+
+    const handleIncrement = () => {
+        if (quantity < maxQuantity) {
+            setQuantity(quantity + 1);
+        }
+    }
+
+    const handleDecrement = () => {
+        if (quantity > 1) {
+            setQuantity(quantity - 1);
+        }
+    }
     return (
         <div className="product-detail" key={selectedId.id}>
             <div className="detail-head">
                 {/* gawing component not finished*/}
                 <div className="images-container">
-                    { currentIndex > 0 && <button className="prev-btn" onClick={previousSlide}> ❮ </button>}
+                    {currentIndex > 0 && <button className="prev-btn" onClick={previousSlide}> ❮ </button>}
                     <div className="images-window">
                         <div className="images-track" style={{ transform: `translateX(-${currentIndex * (100 / 1)}%)` }}>
                             {selectedId.images.map((image, index) => {
@@ -41,26 +55,39 @@ export function ProductDetail({ selectedId }) {
                 </div>
             </div>
             <div className="detail-body">
-                <p>{selectedId.description}</p>
-                {/* Gagawing component --v */}
-                <p>Tags: {selectedId.tags.join(", ")} </p>
-                <p>Warranty: {selectedId.warrantyInformation}</p>
-                <p>Shipping: {selectedId.shippingInformation.slice(6)}</p>
-                <p>Returns: {selectedId.returnPolicy}</p>
-                <p>Quantity:</p>
-                <button>Add to cart</button>
+                <div>
+                    <p>{selectedId.description}</p>
+                    <p>Tags: {selectedId.tags.join(", ")} </p>
+                </div>
 
-                {selectedId.reviews.map((reviews) => {
-                    console.log(reviews.rating)
-                    return (
-                        <div className="Reviews">
-                            <p>Rating: {reviews.rating}</p>
-                            <p>{reviews.reviewerName}</p>
-                            <p>{reviews.date}</p>
-                            <p>{reviews.comment}</p>
-                        </div>
-                    )
-                })}
+                <div>
+                    <p>Warranty: {selectedId.warrantyInformation}</p>
+                    <p>Shipping: {selectedId.shippingInformation.slice(6)}</p>
+                    <p>Returns: {selectedId.returnPolicy}</p>
+
+                </div>
+
+                <div className="action-buttons">
+                    <div className="quantity-picker">
+                        <input className="quantity-input" type="number" value={quantity} readOnly />
+                        <button className="quantity-btn" onClick={handleDecrement}>-</button>
+                        <button className="quantity-btn" onClick={handleIncrement}>+</button>
+                    </div>
+                    <button className="cart-btn">Add to cart</button>
+                </div>
+
+                <div className="reviews-container">
+                    {selectedId.reviews.map((reviews) => {
+                        return (
+                            <div className="reviews" key={reviews.reviewerEmail}>
+                                <p>Rating: {reviews.rating}</p>
+                                <p>{reviews.reviewerName}</p>
+                                <p>{reviews.date}</p>
+                                <p>{reviews.comment}</p>
+                            </div>
+                        )
+                    })}
+                </div>
             </div>
         </div>
     )

@@ -11,6 +11,7 @@
 }
 
 .product-modal {
+  position: relative;
   background: white;
   padding: 20px;
   border-radius: 10px;
@@ -19,4 +20,13 @@
   max-height: 85vh; 
   overflow: auto;
   clip-path: inset(0 round 10px); 
+}
+
+.close-btn {
+  position: absolute;
+  top: 5px;
+  right: 10px;
+  padding: 5px;
+  background: red;
+  color: white;
 }
