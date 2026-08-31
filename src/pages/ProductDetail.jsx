@@ -56,8 +56,16 @@ export function ProductDetail({ selectedId }) {
             </div>
             <div className="detail-body">
                 <div>
+                    {/* To continue */}
                     <p>{selectedId.description}</p>
-                    <p>Tags: {selectedId.tags.join(", ")} </p>
+                    <span className="product-tags"> 
+                        <p>Tags</p> 
+                        {selectedId.tags.map((tag) => {
+                            <div className="tag">
+                                {tag}
+                            </div>
+                        })}
+                    </span>
                 </div>
 
                 <div>
