@@ -1,0 +1,44 @@
+.panel-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.4);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+  z-index: 998;
+}
+
+.panel-backdrop.open {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* === Cart Panel === */
+.cart-panel {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 400px;
+  max-width: 100%;
+  height: 100vh;
+  background-color: #ffffff;
+  box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+  z-index: 999;
+  
+  /* Hide off-screen by default */
+  transform: translateX(100%); 
+  transition: transform 0.3s ease-in-out;
+}
+
+.cart-panel.open {
+  transform: translateX(0);
+}
+
+/*  Cart Header */
+.close-panel {
+    padding: 10px;
+    background: red;
+}
