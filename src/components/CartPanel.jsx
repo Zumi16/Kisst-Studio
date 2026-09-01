@@ -11,7 +11,17 @@ export function CartPanel({ isCartOpen, onClose }) {
                 </div>
                 <div className='cart-body'>
                     <div className='cart-container'>
+                        {/* Continue here */}
                         {/* Cart items sample */}
+                        <div className='cart-item'>
+                            <div className='sample-img'>sample image</div>
+                            <div className='item-detail'>
+                                <h3>Item Titlefggggggggggg</h3>
+                                <p>Price $9.28</p>
+                                <p>item - 1 +</p>
+                            </div>
+                            <button className='remove-item'>Remove</button>
+                        </div>
                         <div className='cart-item'>
                             <div className='sample-img'>sample image</div>
                             <div className='item-detail'>

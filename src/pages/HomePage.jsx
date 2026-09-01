@@ -4,7 +4,6 @@ import ProductGrid from "./ProductGrid";
 
 
 function HomePage({products, total, selectedId,setSelected}) {
-
     return (
         <>
             <Header products={products} total={total}/>
