@@ -75,17 +75,21 @@
 .detail-body {
     display: flex;
     flex-direction: column;
-    padding: 20px;
+    padding: 20px 40px;
     gap: 15px;
 }
 
 .product-tags {
+  margin: 20px 0;
   display: flex;
-  gap: 10px;
+  gap: 8px;
 }
 .tag {
-  padding: 2px;
-  background: green;
+  padding: 0 10px;
+  background: #dddd;
+  border: 2px solid #717171;
+  border-radius: 30px;
+
 }
 
 /* Action buttons (Quantity and Add to Cart) */

@@ -55,17 +55,19 @@ export function ProductDetail({ selectedId }) {
                 </div>
             </div>
             <div className="detail-body">
-                <div>
+                <div className="desc-body">
                     {/* To continue */}
                     <p>{selectedId.description}</p>
-                    <span className="product-tags"> 
-                        <p>Tags</p> 
-                        {selectedId.tags.map((tag) => {
-                            <div className="tag">
-                                {tag}
-                            </div>
+                    <div className="product-tags">
+                        <p>Tags: </p>
+                        {selectedId.tags.map((tag, index) => {
+                            return (
+                                <div className="tag" key={index}>
+                                    {tag}
+                                </div>
+                            )
                         })}
-                    </span>
+                    </div>
                 </div>
 
                 <div>
@@ -85,9 +87,9 @@ export function ProductDetail({ selectedId }) {
                 </div>
 
                 <div className="reviews-container">
-                    {selectedId.reviews.map((reviews) => {
+                    {selectedId.reviews.map((reviews, index) => {
                         return (
-                            <div className="reviews" key={reviews.reviewerEmail}>
+                            <div className="reviews" key={index}>
                                 <p>Rating: {reviews.rating}</p>
                                 <p>{reviews.reviewerName}</p>
                                 <p>{reviews.date}</p>

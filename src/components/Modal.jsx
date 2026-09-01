@@ -1,12 +1,14 @@
 import ProductDetail from '../pages/ProductDetail';
 import './Modal.css'
 
+import CloseIcon from '@mui/icons-material/Close';
+
 export function Modal({ selectedId, setSelected }) {
     return (
         <div className="modal-overlay" onClick={() => setSelected(false)}>
-            <div className="product-modal" onClick={(e) => e.stopPropagation()}>           
+            <div className="product-modal" onClick={(e) => e.stopPropagation()}>
+                <button className='close-btn' onClick={() => setSelected(false)}><CloseIcon fontSize='large'/></button>           
                 <ProductDetail selectedId={selectedId}/>
-                <button className='close-btn' onClick={() => setSelected(false)}>Close</button>
             </div>
         </div>
     )
