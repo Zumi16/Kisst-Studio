@@ -1,13 +1,13 @@
 import './CartPanel.css'
 
-export function CartPanel({ isCartOpen, onClose }) {
+export function CartPanel({ isCartOpen, onClose, cart, setCart }) {
     return (
         <>
             <div className={`panel-backdrop ${isCartOpen ? 'open' : ''}`}></div>
             <div className={`cart-panel ${isCartOpen ? 'open' : ''}`}>
                 <div className='cart-header'>
                     <button className='close-panel' onClick={onClose}>Close</button>
-                    <h2>Your Cart (3 Items)</h2>
+                    <h2>Your Cart ({cart.length} Items)</h2>
                 </div>
                 <div className='cart-body'>
                     <div className='cart-container'>

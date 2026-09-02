@@ -2,6 +2,15 @@ import Modal from "../components/Modal";
 
 export function ProductGrid({ products, selectedId, setSelected, setCart}) {
 
+    // Continue Cart
+    function handleAddToCart (e, productToAdd) {
+        e.stopPropagation();
+
+        setCart(cartItem => {
+            return [...cartItem, {productToAdd, quantity: 1}]
+        })
+    }
+
     return (
         <div className="product-grid">
             {products.map((product) => {
@@ -16,7 +25,7 @@ export function ProductGrid({ products, selectedId, setSelected, setCart}) {
                             <p>Price: {product.price}</p>
                             <p>Stock: {product.stock}</p>
                         </div>
-                        <button className="addtocart-btn" onClick={(e) => {e.stopPropagation(); setCart(cartItems => [...cartItems, product.id]);}}>Add to cart</button>
+                        <button className="addtocart-btn" onClick={(e) => handleAddToCart(e, product)}>Add to cart</button>
                     </div>
                 )
             })}

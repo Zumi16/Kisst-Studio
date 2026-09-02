@@ -3,7 +3,7 @@ import './Header.css'
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import CartPanel from './CartPanel';
 
-export function Header({ products, total }) {
+export function Header({ products, total, cart, setCart }) {
     const [isCartOpen, setIsCartOpen] = useState(false);
 
     function openCartPanel() {
@@ -41,7 +41,7 @@ export function Header({ products, total }) {
                 </div>
             </div>
             
-            <CartPanel isCartOpen={isCartOpen} onClose={() => setIsCartOpen(false)}/>
+            <CartPanel isCartOpen={isCartOpen} cart={cart} setCart={setCart} onClose={() => setIsCartOpen(false)}/>
         </header>
     )
 }
