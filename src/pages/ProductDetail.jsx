@@ -2,7 +2,7 @@ import { useState } from "react";
 import './ProductDetail.css'
 
 
-export function ProductDetail({ selectedId }) {
+export function ProductDetail({ selectedId, handleAddToCart}) {
     const [currentIndex, setCurrentIndex] = useState(0);
     const maxIndex = selectedId.images.length - 1;
     const getStockStatus = selectedId.status === 0 ? "No Stock" : "In stock"
@@ -83,7 +83,7 @@ export function ProductDetail({ selectedId }) {
                         <button className="quantity-btn" onClick={handleDecrement}>-</button>
                         <button className="quantity-btn" onClick={handleIncrement}>+</button>
                     </div>
-                    <button className="cart-btn">Add to cart</button>
+                    <button className="cart-btn" onClick={(e) => handleAddToCart(e, selectedId, quantity)}>Add to cart</button>
                 </div>
 
                 <div className="reviews-container">

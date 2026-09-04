@@ -23,7 +23,7 @@ export function CartPanel({ isCartOpen, onClose, cart, setCart }) {
                                     <div className='item-detail'>
                                         <h3>{product.title}</h3>
                                         <p>Price: {product.price}</p>
-                                        <p>item - 2 +</p>
+                                        <p>item - {product.quantity} +</p>
                                     </div>
                                     <button className='remove-item'>Remove</button>
                                 </div>

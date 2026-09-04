@@ -11,7 +11,12 @@ function HomePage({products, total, selectedId,setSelected}) {
         <>
             <Header products={products} total={total} cart={cart} setCart={setCart}/>
             <div className="home-page">
-                <ProductGrid products={products} selectedId={selectedId} setSelected={setSelected} setCart={setCart}/>
+                <ProductGrid 
+                    products={products} 
+                    selectedId={selectedId} 
+                        setSelected={setSelected} 
+                        setCart={setCart}
+                    />
             </div>
         </>
     )
