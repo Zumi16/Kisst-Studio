@@ -6,8 +6,8 @@ export function CartPanel({ isCartOpen, onClose, cart, setCart }) {
 
     function handleIncrease(productId) {
         setCart(cartItem => {
-            return cartItem.map((item) => 
-                item.id === productId ? {...item, quantity: item.quantity + 1} : item
+            return cartItem.map((item) =>
+                item.id === productId ? { ...item, quantity: item.quantity + 1 } : item
             );
         })
     }
@@ -19,6 +19,28 @@ export function CartPanel({ isCartOpen, onClose, cart, setCart }) {
             )
                 .filter(item => item.quantity > 0);
         })
+    }
+
+    function handleRemove(productId) {
+        const userConfirmed = window.confirm("Are you sure you want to remove this item?")
+
+        if (userConfirmed) {
+            setCart(cartItem => {
+                return cartItem.map((item) =>
+                    item.id === productId ? { ...item, quantity: item.quantity = 0 } : item
+                )
+                    .filter(item => item.quantity > 0);
+            })
+        }
+    }
+
+    function handleClearCart() {
+        const userConfirmed = window.confirm("Are you sure you want to remove all items?")
+
+        if (userConfirmed) {
+            console.log("Cart cleared!")
+            setCart([]);
+        }
     }
 
     console.log(cart)
@@ -45,9 +67,9 @@ export function CartPanel({ isCartOpen, onClose, cart, setCart }) {
                                             <button onClick={() => handleDecrease(product.id)}>Decrease</button>
                                             {product.quantity}
                                             <button onClick={() => handleIncrease(product.id)}>Increase</button>
-                                            </p>
+                                        </p>
                                     </div>
-                                    <button className='remove-item'>Remove</button>
+                                    <button className='remove-item' onClick={() => handleRemove(product.id)}>Remove</button>
                                 </div>
                             )
                         })}
@@ -56,7 +78,7 @@ export function CartPanel({ isCartOpen, onClose, cart, setCart }) {
                         <p>Subtotal (before discount) $33.97</p>
                         <p>You save -$1.69</p>
                         <p>Total {total}</p>
-                        <button>Clear cart</button>
+                        <button onClick={() => handleClearCart()}>Clear cart</button>
                     </div>
                 </div>
             </div>
