@@ -1,8 +1,25 @@
 import './CartPanel.css'
 
 export function CartPanel({ isCartOpen, onClose, cart, setCart }) {
-    const cartCount = cart.reduce((n, i) => n + i.quantity, 0)   
-    const total = cart.reduce((s, i) => s + i.price * i.quantity, 0) 
+    const cartCount = cart.reduce((n, currentItem) => n + currentItem.quantity, 0)
+    const total = cart.reduce((s, currentItem) => s + currentItem.price * currentItem.quantity, 0)
+
+    function handleIncrease(productId) {
+        setCart(cartItem => {
+            return cartItem.map((item) => 
+                item.id === productId ? {...item, quantity: item.quantity + 1} : item
+            );
+        })
+    }
+
+    function handleDecrease(productId) {
+        setCart(cartItem => {
+            return cartItem.map((item) =>
+                item.id === productId ? { ...item, quantity: item.quantity - 1 } : item
+            )
+                .filter(item => item.quantity > 0);
+        })
+    }
 
     console.log(cart)
     return (
@@ -19,11 +36,16 @@ export function CartPanel({ isCartOpen, onClose, cart, setCart }) {
                         {cart.map((product) => {
                             return (
                                 <div className='cart-item' key={product.id}>
-                                    <img className='item-img' src={product.thumbnail}/>
+                                    <img className='item-img' src={product.thumbnail} />
                                     <div className='item-detail'>
                                         <h3>{product.title}</h3>
                                         <p>Price: {product.price}</p>
-                                        <p>item - {product.quantity} +</p>
+
+                                        <p>item
+                                            <button onClick={() => handleDecrease(product.id)}>Decrease</button>
+                                            {product.quantity}
+                                            <button onClick={() => handleIncrease(product.id)}>Increase</button>
+                                            </p>
                                     </div>
                                     <button className='remove-item'>Remove</button>
                                 </div>
