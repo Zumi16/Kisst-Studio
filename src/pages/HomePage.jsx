@@ -13,7 +13,6 @@ function HomePage({products, total, selectedId,setSelected}) {
             <div className="home-page">
                 <ProductGrid products={products} selectedId={selectedId} setSelected={setSelected} setCart={setCart}/>
             </div>
-            {console.log(cart)}
         </>
     )
 }

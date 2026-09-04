@@ -3,11 +3,11 @@ import Modal from "../components/Modal";
 export function ProductGrid({ products, selectedId, setSelected, setCart}) {
 
     // Continue Cart
-    function handleAddToCart (e, productToAdd) {
+    function handleAddToCart (e, cartProduct) {
         e.stopPropagation();
 
         setCart(cartItem => {
-            return [...cartItem, {productToAdd, quantity: 1}]
+            return [...cartItem, {cartProduct, quantity: 1}]
         })
     }
 
