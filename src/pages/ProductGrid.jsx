@@ -7,7 +7,7 @@ export function ProductGrid({ products, selectedId, setSelected, setCart}) {
         e.stopPropagation();
 
         setCart(cartItem => {
-            return [...cartItem, {cartProduct, quantity: 1}]
+            return [...cartItem, {...cartProduct, quantity: 1}]
         })
     }
 

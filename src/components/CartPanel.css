@@ -82,10 +82,10 @@
     padding: 10px;
     background: white;
 }
-.sample-img {
+.item-img {
     width: 120px;
     height: 80px;
-    background: gray;
+    background: rgb(230, 230, 230);
 }
 .item-detail {
     display: flex;
