@@ -1,23 +1,31 @@
+import { useState } from "react";
 import Modal from "../components/Modal";
 
-export function ProductGrid({ products, selectedId, setSelected, setCart}) {
+export function ProductGrid({ products, selectedId, setSelected, setCart }) {
+    const [addedProductId, setAddedProductId] = useState(null)
     // Continue Cart
-    function handleAddToCart (e, cartProduct, quantity) {
+    function handleAddToCart(e, cartProduct, quantity) {
         e.stopPropagation();
 
         setCart(cartItem => {
-        const isExisting = cartItem.find((item) => item.id === cartProduct.id);
+            const isExisting = cartItem.find((item) => item.id === cartProduct.id);
 
-        if (isExisting) {
-            return cartItem.map((item) => 
-                item.id === cartProduct.id
-                ? {...item, quantity: item.quantity + quantity }
-                : item
-            );
-        }
-        
-        return [...cartItem, {...cartProduct, quantity: quantity}]
+            if (isExisting) {
+                return cartItem.map((item) =>
+                    item.id === cartProduct.id
+                        ? { ...item, quantity: item.quantity + quantity }
+                        : item
+                );
+            }
+
+            return [...cartItem, { ...cartProduct, quantity: quantity }]
         })
+        
+        setAddedProductId(cartProduct.id)
+
+        setTimeout(() => {
+            setAddedProductId(null);
+        }, 2000);
     }
     return (
         <div className="product-grid">
@@ -34,6 +42,7 @@ export function ProductGrid({ products, selectedId, setSelected, setCart}) {
                             <p>Stock: {product.stock}</p>
                         </div>
                         <button className="addtocart-btn" onClick={(e) => handleAddToCart(e, product, 1)}>Add to cart</button>
+                        {addedProductId === product.id && <p>Added to cart!</p>}
                     </div>
                 )
             })}
