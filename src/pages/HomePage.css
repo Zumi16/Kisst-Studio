@@ -25,6 +25,13 @@
   box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4);
   transform: translateY(-4px); 
 }
+
+.product-action {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    color: green;
+}
 .addtocart-btn {
     margin-left: auto;
     height: 40px;

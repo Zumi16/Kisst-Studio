@@ -48,9 +48,10 @@
 }
 
 .close-panel {
-    max-width: 15%;
-    padding: 10px;
+    max-width: 10%;
+    padding: 0 10px;
     background: red;
+    color: white;
 }
 
 /* Cart Body */
@@ -100,7 +101,34 @@
   margin: 0;
 }
 
+/* Quantity Container */
+.quantity-container {
+    display: flex;
+    gap: 10px
+}
+.quantity-btn {
+    padding: 0;
+}
+
 .remove-item {
     background: red;
     padding: 3px;
+}
+
+/* Total Container */
+.total-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.clear-container{
+    display: flex;
+    justify-content: center;
+}
+.clear-container button {
+    width: 50%;
+    padding: 10px 20px;
+    background-color: #e5a64c;
+    color: white;
 }

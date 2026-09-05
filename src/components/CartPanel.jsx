@@ -1,4 +1,5 @@
 import './CartPanel.css'
+import CloseIcon from '@mui/icons-material/Close';
 
 export function CartPanel({ isCartOpen, onClose, cart, setCart }) {
     const cartCount = cart.reduce((n, currentItem) => n + currentItem.quantity, 0)
@@ -49,7 +50,7 @@ export function CartPanel({ isCartOpen, onClose, cart, setCart }) {
             <div className={`panel-backdrop ${isCartOpen ? 'open' : ''}`}></div>
             <div className={`cart-panel ${isCartOpen ? 'open' : ''}`}>
                 <div className='cart-header'>
-                    <button className='close-panel' onClick={onClose}>Close</button>
+                    <button className='close-panel' onClick={onClose}><CloseIcon /></button>
                     <h2>Your Cart ({cartCount} Items)</h2>
                 </div>
                 <div className='cart-body'>
@@ -63,11 +64,12 @@ export function CartPanel({ isCartOpen, onClose, cart, setCart }) {
                                         <h3>{product.title}</h3>
                                         <p>Price: {product.price}</p>
 
-                                        <p>item
-                                            <button onClick={() => handleDecrease(product.id)}>Decrease</button>
+                                        <div className='quantity-container'>
+                                            <p>Item:</p>
+                                            <button className='quantity-btn' onClick={() => handleDecrease(product.id)}>-</button>
                                             {product.quantity}
-                                            <button onClick={() => handleIncrease(product.id)}>Increase</button>
-                                        </p>
+                                            <button className='quantity-btn' onClick={() => handleIncrease(product.id)}>+</button>
+                                        </div>
                                     </div>
                                     <button className='remove-item' onClick={() => handleRemove(product.id)}>Remove</button>
                                 </div>
@@ -75,10 +77,14 @@ export function CartPanel({ isCartOpen, onClose, cart, setCart }) {
                         })}
                     </div>
                     <div className='total-container'>
-                        <p>Subtotal (before discount) $33.97</p>
-                        <p>You save -$1.69</p>
-                        <p>Total {total}</p>
-                        <button onClick={() => handleClearCart()}>Clear cart</button>
+                        <div className='total-overall'>
+                            <p>Subtotal (before discount) $33.97</p>
+                            <p>You save -$1.69</p>
+                            <p>Total {total}</p>
+                        </div>
+                        <div className='clear-container'>
+                            <button onClick={() => handleClearCart()}>Clear cart</button>
+                        </div>
                     </div>
                 </div>
             </div>
