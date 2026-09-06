@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Modal from "../components/Modal";
+import { getDiscountedPrice } from "../utils/format";
 
 export function ProductGrid({ products, selectedId, setSelected, setCart }) {
     const [addedProductId, setAddedProductId] = useState(null)
@@ -42,6 +43,8 @@ export function ProductGrid({ products, selectedId, setSelected, setCart }) {
     return (
         <div className="product-grid">
             {products.map((product) => {
+                const discountedPrice = getDiscountedPrice(product.price, product.discountPercentage).toFixed(2)
+
                 return (
                     <div className="product" key={product.id} onClick={() => setSelected(product)}>
                         {/* <p>Description: {product.description}</p> */}
@@ -50,7 +53,7 @@ export function ProductGrid({ products, selectedId, setSelected, setCart }) {
                             <h1>{product.title}</h1>
                             <p>Category: {product.category}</p>
                             <p>Rating: {product.rating}</p>
-                            <p>Price: {product.price}</p>
+                            <p>Price: ${discountedPrice} - ${product.price} </p>
                             <p>Stock: {product.stock}</p>
                         </div>
                         <div className="product-action">

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import './ProductDetail.css'
-
+import { getDiscountedPrice } from "../utils/format";
 
 export function ProductDetail({ selectedId, handleAddToCart}) {
     const [currentIndex, setCurrentIndex] = useState(0);
@@ -8,6 +8,7 @@ export function ProductDetail({ selectedId, handleAddToCart}) {
     const getStockStatus = selectedId.status === 0 ? "No Stock" : "In stock"
     const [quantity, setQuantity] = useState(1);
     const maxQuantity = 10;
+    const discountedPrice = getDiscountedPrice(selectedId.price, selectedId.discountPercentage).toFixed(2)
 
     const nextSlide = () => {
         if (currentIndex < maxIndex) setCurrentIndex(currentIndex + 1);
@@ -50,7 +51,7 @@ export function ProductDetail({ selectedId, handleAddToCart}) {
                 <div className="product-info">
                     <h1>{selectedId.title}</h1>
                     <p>Rating: {selectedId.rating} ({selectedId.reviews.length} reviews)</p>
-                    <p>${selectedId.price}</p>
+                    <p>${selectedId.price} - ${discountedPrice} %{Math.round(selectedId.discountPercentage)}</p>
                     <p>{getStockStatus} - {selectedId.stock} left!</p>
                 </div>
             </div>

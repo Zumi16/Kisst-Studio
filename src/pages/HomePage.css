@@ -20,6 +20,7 @@
     transition: box-shadow 0.3s ease, transform 0.3s ease;
     justify-content: space-between;
     gap: 10px;
+    cursor: pointer;
 }
 .product:hover {
   box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4);

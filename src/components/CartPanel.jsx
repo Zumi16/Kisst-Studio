@@ -1,9 +1,12 @@
 import './CartPanel.css'
 import CloseIcon from '@mui/icons-material/Close';
+import { getDiscountedPrice } from '../utils/format';
 
 export function CartPanel({ isCartOpen, onClose, cart, setCart }) {
     const cartCount = cart.reduce((n, currentItem) => n + currentItem.quantity, 0)
     const total = cart.reduce((s, currentItem) => s + currentItem.price * currentItem.quantity, 0)
+    const discountedPrice = cart.map((currentItem) => getDiscountedPrice(total, currentItem.discountPercentage).toFixed(2))
+    const saved = cart.map((currentItem) => (total * +(currentItem.discountPercentage / 100)).toFixed(2))
 
     function handleIncrease(productId) {
         setCart(cartItem => {
@@ -43,7 +46,6 @@ export function CartPanel({ isCartOpen, onClose, cart, setCart }) {
             setCart([]);
         }
     }
-
     console.log(cart)
     return (
         <>
@@ -62,13 +64,15 @@ export function CartPanel({ isCartOpen, onClose, cart, setCart }) {
                                     <img className='item-img' src={product.thumbnail} />
                                     <div className='item-detail'>
                                         <h3>{product.title}</h3>
-                                        <p>Price: {product.price}</p>
 
-                                        <div className='quantity-container'>
-                                            <p>Item:</p>
-                                            <button className='quantity-btn' onClick={() => handleDecrease(product.id)}>-</button>
-                                            {product.quantity}
-                                            <button className='quantity-btn' onClick={() => handleIncrease(product.id)}>+</button>
+                                        <div className='pricetoquantity-detail'>
+                                            <p>${product.price}</p>
+                                            <div className='quantity-container'>
+                                                <button className='quantity-btn' onClick={() => handleDecrease(product.id)}>-</button>
+                                                {product.quantity}
+                                                <button className='quantity-btn' onClick={() => handleIncrease(product.id)}>+</button>
+                                            </div>
+                                            <p>${product.price * product.quantity}</p>
                                         </div>
                                     </div>
                                     <button className='remove-item' onClick={() => handleRemove(product.id)}>Remove</button>
@@ -78,9 +82,9 @@ export function CartPanel({ isCartOpen, onClose, cart, setCart }) {
                     </div>
                     <div className='total-container'>
                         <div className='total-overall'>
-                            <p>Subtotal (before discount) $33.97</p>
-                            <p>You save -$1.69</p>
-                            <p>Total {total}</p>
+                            <p>Subtotal (before discount) ${total}</p>
+                            <p>You save ${saved}</p>
+                            <p>Total ${discountedPrice}</p>
                         </div>
                         <div className='clear-container'>
                             <button onClick={() => handleClearCart()}>Clear cart</button>
