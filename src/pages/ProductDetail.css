@@ -96,11 +96,17 @@
 .action-buttons {
   display: flex;
   justify-content: space-around;
+  align-items: center;
 }
 .quantity-picker  {
   display: flex;
   gap: 5px;
 } 
+.added-to-cart {
+  position: absolute;
+  right: 35%;
+  color: green;
+}
 .quantity-input {
   min-width: 50px;
   padding: 0 10px;

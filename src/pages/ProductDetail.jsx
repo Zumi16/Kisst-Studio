@@ -2,7 +2,7 @@ import { useState } from "react";
 import './ProductDetail.css'
 import { getDiscountedPrice } from "../utils/format";
 
-export function ProductDetail({ selectedId, handleAddToCart}) {
+export function ProductDetail({ selectedId, handleAddToCart, addedProductId }) {
     const [currentIndex, setCurrentIndex] = useState(0);
     const maxIndex = selectedId.images.length - 1;
     const getStockStatus = selectedId.status === 0 ? "No Stock" : "In stock"
@@ -29,6 +29,7 @@ export function ProductDetail({ selectedId, handleAddToCart}) {
             setQuantity(quantity - 1);
         }
     }
+
     return (
         <div className="product-detail" key={selectedId.id}>
             <div className="detail-head">
@@ -84,6 +85,7 @@ export function ProductDetail({ selectedId, handleAddToCart}) {
                         <button className="quantity-btn" onClick={handleDecrement}>-</button>
                         <button className="quantity-btn" onClick={handleIncrement}>+</button>
                     </div>
+                    {addedProductId === selectedId.id && <p className="added-to-cart"> Added to cart!</p>}
                     <button className="cart-btn" onClick={(e) => handleAddToCart(e, selectedId, quantity)}>Add to cart</button>
                 </div>
 

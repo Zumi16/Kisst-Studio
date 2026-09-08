@@ -69,6 +69,7 @@ export function ProductGrid({ products, selectedId, setSelected, setCart }) {
                     handleAddToCart={handleAddToCart}
                     selectedId={selectedId}
                     setSelected={setSelected}
+                    addedProductId={addedProductId}
                 />
             )}
         </div>
