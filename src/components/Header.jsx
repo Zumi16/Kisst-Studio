@@ -3,13 +3,13 @@ import './Header.css'
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import CartPanel from './CartPanel';
 
-export function Header({ products, total, cart, setCart }) {
+export function Header({ products, total, cart, setCart, categories, setSelectedCategories}) {
     const [isCartOpen, setIsCartOpen] = useState(false);
 
     function openCartPanel() {
         setIsCartOpen(true)
     }
-
+    
     return (
         <header>
             <div className="main-header">
@@ -23,7 +23,11 @@ export function Header({ products, total, cart, setCart }) {
             </div>
             <div className='sub-header'>
                 <div className='left-section'>
-                    <p>All Categories Dropdown</p>
+                    <div className='category-action'>
+                        {categories.map((category) => {
+                            return <button key={category} onClick={() => setSelectedCategories(category)}>{category}</button>
+                        })}
+                    </div>
                     <p>Featured/Sort Dropdown</p>
                     <p>Price Slider</p>
                     <p>In stock only</p>

@@ -2,10 +2,8 @@ import { useState } from "react";
 import Modal from "../components/Modal";
 import { getDiscountedPrice } from "../utils/format";
 
-export function ProductGrid({ products, selectedId, setSelected, setCart }) {
+export function ProductGrid({ selectedId, setSelected, setCart, filteredProducts }) {
     const [addedProductId, setAddedProductId] = useState(null)
-
-    // ===
     //Review this kung pano naseselect yung specific na product sobrang nakakalito!
     // ===
     function handleAddToCart(e, cartProduct, quantity) {
@@ -33,7 +31,7 @@ export function ProductGrid({ products, selectedId, setSelected, setCart }) {
 
             return [...cartItem, { ...cartProduct, quantity: quantity }]
         })
-        
+
         setAddedProductId(cartProduct.id)
 
         setTimeout(() => {
@@ -42,7 +40,7 @@ export function ProductGrid({ products, selectedId, setSelected, setCart }) {
     }
     return (
         <div className="product-grid">
-            {products.map((product) => {
+            {filteredProducts.map((product) => {
                 const discountedPrice = getDiscountedPrice(product.price, product.discountPercentage).toFixed(2)
 
                 return (
