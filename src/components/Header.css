@@ -62,11 +62,10 @@
 
 /* dropdown */
 .dropdown-container {
-    position: relative;
+    position: relative; /* CRITICAL: Enables absolute positioning for dropdown-menu */
     display: inline-block;
     font-family: Arial, sans-serif;
 }
-
 .dropdown-container button {
     background-color: #007bff;
     color: white;

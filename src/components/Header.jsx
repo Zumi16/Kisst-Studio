@@ -13,7 +13,7 @@ export function Header({ products, total, cart, setCart, categories, setSelected
         setSelectedCategories(category)
         setIsCategoriesOpen(false);  
     }
-    // continue dropdown
+    // continue dropdown reusable
 
     function openCartPanel() {
         setIsCartOpen(true);
@@ -34,19 +34,13 @@ export function Header({ products, total, cart, setCart, categories, setSelected
                 <div className='left-section'>
                     <div className='dropdown-container'>
                         <button onClick={toggleDropdown}>Category</button>
-
                         {isCategoriesOpen && (
                             <ul className='dropdown-menu'>
                                 {categories.map((category) => {
-                                    <li onClick={() => handleCategoryClick(category)}>{category}</li>
+                                    return <li onClick={() => handleCategoryClick(category)}>{category}</li>
                                 })}
                             </ul>
                         )}
-                    </div>
-                    <div className='category-action'>
-                        {categories.map((category) => {
-                            return <button key={category} onClick={() => setSelectedCategories(category)}>{category}</button>
-                        })}
                     </div>
                     <p>Featured/Sort Dropdown</p>
                     <p>Price Slider</p>
