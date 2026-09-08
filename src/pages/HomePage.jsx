@@ -5,7 +5,6 @@ import { useState } from "react";
 
 function HomePage({ products, total, selectedId, setSelected, categories, setSelectedCategories, filteredProducts}) {
     const [cart, setCart] = useState([]);
-    // Tuloy sa cart
 
     return (
         <>

@@ -3,13 +3,22 @@ import './Header.css'
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import CartPanel from './CartPanel';
 
-export function Header({ products, total, cart, setCart, categories, setSelectedCategories}) {
+export function Header({ products, total, cart, setCart, categories, setSelectedCategories }) {
     const [isCartOpen, setIsCartOpen] = useState(false);
+    const [isCategoriesOpen, setIsCategoriesOpen] = useState(false);
+
+    function toggleDropdown() { setIsCategoriesOpen(true) };
+
+    function handleCategoryClick(category) {
+        setSelectedCategories(category)
+        setIsCategoriesOpen(false);  
+    }
+    // continue dropdown
 
     function openCartPanel() {
-        setIsCartOpen(true)
+        setIsCartOpen(true);
     }
-    
+
     return (
         <header>
             <div className="main-header">
@@ -23,6 +32,17 @@ export function Header({ products, total, cart, setCart, categories, setSelected
             </div>
             <div className='sub-header'>
                 <div className='left-section'>
+                    <div className='dropdown-container'>
+                        <button onClick={toggleDropdown}>Category</button>
+
+                        {isCategoriesOpen && (
+                            <ul className='dropdown-menu'>
+                                {categories.map((category) => {
+                                    <li onClick={() => handleCategoryClick(category)}>{category}</li>
+                                })}
+                            </ul>
+                        )}
+                    </div>
                     <div className='category-action'>
                         {categories.map((category) => {
                             return <button key={category} onClick={() => setSelectedCategories(category)}>{category}</button>
@@ -44,8 +64,8 @@ export function Header({ products, total, cart, setCart, categories, setSelected
                     <p>Category 2</p>
                 </div>
             </div>
-            
-            <CartPanel isCartOpen={isCartOpen} cart={cart} setCart={setCart} onClose={() => setIsCartOpen(false)}/>
+
+            <CartPanel isCartOpen={isCartOpen} cart={cart} setCart={setCart} onClose={() => setIsCartOpen(false)} />
         </header>
     )
 }
