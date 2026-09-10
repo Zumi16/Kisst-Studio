@@ -1,8 +1,7 @@
 import { useState } from "react";
 import Modal from "../components/Modal";
-import { getDiscountedPrice } from "../utils/format";
 
-export function ProductGrid({ selectedId, setSelected, setCart, filteredProducts }) {
+export function ProductGrid({ selectedId, setSelected, setCart, finalPrice, visible }) {
     const [addedProductId, setAddedProductId] = useState(null)
     //Review this kung pano naseselect yung specific na product sobrang nakakalito!
     // ===
@@ -40,8 +39,7 @@ export function ProductGrid({ selectedId, setSelected, setCart, filteredProducts
     }
     return (
         <div className="product-grid">
-            {filteredProducts.map((product) => {
-                const discountedPrice = getDiscountedPrice(product.price, product.discountPercentage).toFixed(2)
+            {visible.map((product) => {
 
                 return (
                     <div className="product" key={product.id} onClick={() => setSelected(product)}>
@@ -51,7 +49,7 @@ export function ProductGrid({ selectedId, setSelected, setCart, filteredProducts
                             <h1>{product.title}</h1>
                             <p>Category: {product.category}</p>
                             <p>Rating: {product.rating}</p>
-                            <p>Price: ${discountedPrice} - ${product.price} </p>
+                            <p>Price: ${finalPrice(product)} - ${product.price} </p>
                             <p>Stock: {product.stock}</p>
                         </div>
                         <div className="product-action">

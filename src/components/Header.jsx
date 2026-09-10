@@ -3,7 +3,7 @@ import './Header.css'
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import CartPanel from './CartPanel';
 
-export function Header({ products, total, cart, setCart, categories, setSelectedCategories }) {
+export function Header({ products, total, cart, setCart, categories, setSelectedCategories, sortOptions, setSortBy}) {
     const [isCartOpen, setIsCartOpen] = useState(false);
     const [openDropdown, setOpenDropdown] = useState(null);
 
@@ -13,11 +13,12 @@ export function Header({ products, total, cart, setCart, categories, setSelected
     };
 
     function handleCategoryClick(category) {
-        setSelectedCategories(category)
-        setOpenDropdown(null);  
+        setSelectedCategories(category);
+        setOpenDropdown(null); 
     }
 
-    function handleSortClick() {
+    function handleSortClick(option) {
+        setSortBy(option)
         setOpenDropdown(null);
     }
     // continue dropdown reusable
@@ -52,8 +53,10 @@ export function Header({ products, total, cart, setCart, categories, setSelected
                     <div className='dropdown-container'>
                         <button onClick={() => toggleDropdown('sort')}>Sort</button>
                         {openDropdown === 'sort' && (
-                            <ul className='dropdown-menu'>
-                                <li onClick={() => handleSortClick}>Featured</li>
+                            <ul className='dropdown-menu' >
+                                {sortOptions.map((option) => {
+                                    return <li onClick={() => handleSortClick(option)}>{option}</li>
+                                })}
                             </ul>
                          )}
                     </div>
