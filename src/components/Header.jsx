@@ -5,13 +5,20 @@ import CartPanel from './CartPanel';
 
 export function Header({ products, total, cart, setCart, categories, setSelectedCategories }) {
     const [isCartOpen, setIsCartOpen] = useState(false);
-    const [isCategoriesOpen, setIsCategoriesOpen] = useState(false);
+    const [openDropdown, setOpenDropdown] = useState(null);
 
-    function toggleDropdown() { setIsCategoriesOpen(true) };
+    //  name specifies dropdown name/type
+    function toggleDropdown(name) { 
+        setOpenDropdown(prev => prev === name ? null : name);
+    };
 
     function handleCategoryClick(category) {
         setSelectedCategories(category)
-        setIsCategoriesOpen(false);  
+        setOpenDropdown(null);  
+    }
+
+    function handleSortClick() {
+        setOpenDropdown(null);
     }
     // continue dropdown reusable
 
@@ -33,8 +40,8 @@ export function Header({ products, total, cart, setCart, categories, setSelected
             <div className='sub-header'>
                 <div className='left-section'>
                     <div className='dropdown-container'>
-                        <button onClick={toggleDropdown}>Category</button>
-                        {isCategoriesOpen && (
+                        <button onClick={() => toggleDropdown('category')}>Category</button>
+                        {openDropdown === 'category' && (
                             <ul className='dropdown-menu'>
                                 {categories.map((category) => {
                                     return <li onClick={() => handleCategoryClick(category)}>{category}</li>
@@ -42,7 +49,15 @@ export function Header({ products, total, cart, setCart, categories, setSelected
                             </ul>
                         )}
                     </div>
-                    <p>Featured/Sort Dropdown</p>
+                    <div className='dropdown-container'>
+                        <button onClick={() => toggleDropdown('sort')}>Sort</button>
+                        {openDropdown === 'sort' && (
+                            <ul className='dropdown-menu'>
+                                <li onClick={() => handleSortClick}>Featured</li>
+                            </ul>
+                         )}
+                    </div>
+
                     <p>Price Slider</p>
                     <p>In stock only</p>
                     <p>Clear All</p>
