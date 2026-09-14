@@ -3,7 +3,7 @@ import './Header.css'
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import CartPanel from './CartPanel';
 
-export function Header({ products, total, cart, setCart, categories, setSelectedCategories, sortOptions, setSortBy}) {
+export function Header({ products, total, cart, setCart, categories, setSelectedCategories, sortOptions, setSortBy, maxPrice, setMaxPrice}) {
     const [isCartOpen, setIsCartOpen] = useState(false);
     const [openDropdown, setOpenDropdown] = useState(null);
 
@@ -60,8 +60,18 @@ export function Header({ products, total, cart, setCart, categories, setSelected
                             </ul>
                          )}
                     </div>
-
-                    <p>Price Slider</p>
+                    <div>
+                        <div>
+                            <label>Max Price: ${maxPrice}</label>
+                            <input 
+                                type='range' 
+                                min='0' 
+                                max='2000'
+                                value={maxPrice}
+                                onChange={(e) => setMaxPrice(Number(e.target.value))}
+                            />
+                        </div>
+                    </div>
                     <p>In stock only</p>
                     <p>Clear All</p>
                 </div>

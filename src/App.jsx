@@ -10,15 +10,18 @@ function App() {
   const [selectedId, setSelected] = useState(null);
   const [selectedCategories, setSelectedCategories] = useState("all");
   const [sortBy, setSortBy] = useState("featured")
+  const [maxPrice, setMaxPrice] = useState(1000);
 
   const sortOptions = ["featured", "price-asc", "price-desc", "name-asc"]
   const categories = ["all", ...new Set(products.map((p) => p.category))]
 
-  const finalPrice = (product) => getDiscountedPrice(product.price, product.discountPercentage).toFixed(2);
+  const finalPrice = (product) => getDiscountedPrice(product.price, product.discountPercentage);
   // const filteredProducts = selectedCategories === "all" ? products : products.filter((product) => product.category === selectedCategories)
   const visible = [...products]
     .filter((product) => {
-      return selectedCategories === "all" || product.category === selectedCategories
+      const categoryMatch = selectedCategories === "all" || product.category === selectedCategories 
+      const priceMatch = finalPrice(product) <= maxPrice
+      return categoryMatch && priceMatch; 
     }).sort((a, b) => {
       if (sortBy === "price-asc") return finalPrice(a) - finalPrice(b);
       if (sortBy === "price-desc") return finalPrice(b) - finalPrice(a);
@@ -51,6 +54,8 @@ function App() {
         finalPrice={finalPrice}
         sortOptions={sortOptions}
         setSortBy={setSortBy}
+        maxPrice={maxPrice}
+        setMaxPrice={setMaxPrice}
       />
     </>
   )

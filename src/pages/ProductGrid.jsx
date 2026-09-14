@@ -49,7 +49,7 @@ export function ProductGrid({ selectedId, setSelected, setCart, finalPrice, visi
                             <h1>{product.title}</h1>
                             <p>Category: {product.category}</p>
                             <p>Rating: {product.rating}</p>
-                            <p>Price: ${finalPrice(product)} - ${product.price} </p>
+                            <p>Price: ${finalPrice(product).toFixed(2)} - ${product.price} </p>
                             <p>Stock: {product.stock}</p>
                         </div>
                         <div className="product-action">
