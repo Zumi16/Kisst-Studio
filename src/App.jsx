@@ -12,6 +12,7 @@ function App() {
   const [sortBy, setSortBy] = useState("featured")
   const [maxPrice, setMaxPrice] = useState(1000);
   const [search, setSearch] = useState("");
+  const [isInStock, setIsInStock] = useState (false);
 
   const sortOptions = ["featured", "price-asc", "price-desc", "name-asc"]
   const categories = ["all", ...new Set(products.map((p) => p.category))]
@@ -23,8 +24,9 @@ function App() {
       const categoryMatch = selectedCategories === "all" || product.category === selectedCategories 
       const priceMatch = finalPrice(product) <= maxPrice
       const searchMatch = product.title.toLowerCase().includes(search.toLowerCase());
+      const stockMatch = !isInStock || product.stock > 0
 
-      return categoryMatch && priceMatch && searchMatch; 
+      return categoryMatch && priceMatch && searchMatch && stockMatch; 
     }).sort((a, b) => {
       if (sortBy === "price-asc") return finalPrice(a) - finalPrice(b);
       if (sortBy === "price-desc") return finalPrice(b) - finalPrice(a);
@@ -42,7 +44,8 @@ function App() {
     }
     getProducts();
   }, [])
-  
+
+  console.log(visible)
   return (
     <>
       <HomePage
@@ -60,6 +63,8 @@ function App() {
         setMaxPrice={setMaxPrice}
         search={search}
         setSearch={setSearch}
+        isInStock={isInStock}
+        setIsInStock={setIsInStock}
       />
     </>
   )

@@ -3,7 +3,7 @@ import './Header.css'
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import CartPanel from './CartPanel';
 
-export function Header({ products, total, cart, setCart, categories, setSelectedCategories, sortOptions, setSortBy, maxPrice, setMaxPrice, search, setSearch}) {
+export function Header({ products, total, cart, setCart, categories, setSelectedCategories, sortOptions, setSortBy, maxPrice, setMaxPrice, search, setSearch, isInStock, setIsInStock}) {
     const [isCartOpen, setIsCartOpen] = useState(false);
     const [openDropdown, setOpenDropdown] = useState(null);
 
@@ -27,6 +27,10 @@ export function Header({ products, total, cart, setCart, categories, setSelected
         setIsCartOpen(true);
     }
 
+    function handleInStockClick(event) {
+        setIsInStock(event.target.checked)
+    }
+
     return (
         <header>
             <div className="main-header">
@@ -45,7 +49,7 @@ export function Header({ products, total, cart, setCart, categories, setSelected
                         {openDropdown === 'category' && (
                             <ul className='dropdown-menu'>
                                 {categories.map((category) => {
-                                    return <li onClick={() => handleCategoryClick(category)}>{category}</li>
+                                    return <li key={category} onClick={() => handleCategoryClick(category)}>{category}</li>
                                 })}
                             </ul>
                         )}
@@ -55,7 +59,7 @@ export function Header({ products, total, cart, setCart, categories, setSelected
                         {openDropdown === 'sort' && (
                             <ul className='dropdown-menu' >
                                 {sortOptions.map((option) => {
-                                    return <li onClick={() => handleSortClick(option)}>{option}</li>
+                                    return <li key={option} onClick={() => handleSortClick(option)}>{option}</li>
                                 })}
                             </ul>
                          )}
@@ -72,7 +76,10 @@ export function Header({ products, total, cart, setCart, categories, setSelected
                             />
                         </div>
                     </div>
-                    <p>In stock only</p>
+                    <div>
+                        <input type='checkbox' checked={isInStock} onChange={handleInStockClick}/>
+                        <label>In stock only</label>
+                    </div>
                     <p>Clear All</p>
                 </div>
                 <div className='right-section'>
