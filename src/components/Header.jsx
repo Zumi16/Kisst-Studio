@@ -6,6 +6,13 @@ import CartPanel from './CartPanel';
 export function Header({ products, total, cart, setCart, categories, setSelectedCategories, sortOptions, setSortBy, maxPrice, setMaxPrice, search, setSearch, isInStock, setIsInStock}) {
     const [isCartOpen, setIsCartOpen] = useState(false);
     const [openDropdown, setOpenDropdown] = useState(null);
+    const INITIAL_FILTERS = {
+        search: "",
+        category: "all",
+        sortBy: "featured",
+        maxPrice: 1000,
+        isInStock: false,
+    };
 
     //  name specifies dropdown name/type
     function toggleDropdown(name) { 
@@ -29,6 +36,14 @@ export function Header({ products, total, cart, setCart, categories, setSelected
 
     function handleInStockClick(event) {
         setIsInStock(event.target.checked)
+    }
+
+    function handleClearFilter() {
+        setSortBy(INITIAL_FILTERS.sortBy)
+        setSearch(INITIAL_FILTERS.search);
+        setSelectedCategories(INITIAL_FILTERS.category);
+        setMaxPrice(INITIAL_FILTERS.maxPrice);
+        setIsInStock(INITIAL_FILTERS.isInStock);
     }
 
     return (
@@ -70,7 +85,7 @@ export function Header({ products, total, cart, setCart, categories, setSelected
                             <input 
                                 type='range' 
                                 min='0' 
-                                max='2000'
+                                max='2500'
                                 value={maxPrice}
                                 onChange={(e) => setMaxPrice(Number(e.target.value))}
                             />
@@ -80,7 +95,7 @@ export function Header({ products, total, cart, setCart, categories, setSelected
                         <input type='checkbox' checked={isInStock} onChange={handleInStockClick}/>
                         <label>In stock only</label>
                     </div>
-                    <p>Clear All</p>
+                    <button onClick={handleClearFilter}>Clear all</button>
                 </div>
                 <div className='right-section'>
                     <input 
