@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Modal from "../components/Modal";
+import './ProductGrid.css'
 
 export function ProductGrid({ selectedId, setSelected, setCart, finalPrice, visible }) {
     const [addedProductId, setAddedProductId] = useState(null)
@@ -50,9 +51,9 @@ export function ProductGrid({ selectedId, setSelected, setCart, finalPrice, visi
         <div className="page-body">
             {totalPages > 1 && (
                 <div className="pagination-actions">
-                    <button disabled={currentPage === 1} onClick={() => setCurrentPage(prev => prev - 1)}>Previous</button>
-                    <p>{currentPage} of {totalPages}</p>
-                    <button disabled={currentPage === totalPages} onClick={() => setCurrentPage(prev => prev + 1)}>Next</button>
+                    <button className="prev-page" disabled={currentPage === 1} onClick={() => setCurrentPage(prev => prev - 1)}>Previous</button>
+                    <p>Page {currentPage} of {totalPages}</p>
+                    <button className="next-page" disabled={currentPage === totalPages} onClick={() => setCurrentPage(prev => prev + 1)}>Next</button>
                 </div>
             )}
 
@@ -90,9 +91,9 @@ export function ProductGrid({ selectedId, setSelected, setCart, finalPrice, visi
 
             {totalPages > 1 && (
                 <div className="pagination-actions">
-                    <button disabled={currentPage === 1} onClick={() => setCurrentPage(prev => prev - 1)}>Previous</button>
-                    <p>{currentPage} of {totalPages}</p>
-                    <button disabled={currentPage === totalPages} onClick={() => setCurrentPage(prev => prev + 1)}>Next</button>
+                    <button className="prev-page" disabled={currentPage === 1} onClick={() => setCurrentPage(prev => prev - 1)}>Previous</button>
+                    <p>Page {currentPage} of {totalPages}</p>
+                    <button className="next-page" disabled={currentPage === totalPages} onClick={() => setCurrentPage(prev => prev + 1)}>Next</button>
                 </div>
             )}
         </div>
