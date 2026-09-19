@@ -36,6 +36,13 @@
     align-items: center;
 }
 
+.clear-all {
+    padding: 5px 10px;
+    border-radius: 10px;
+    background-color: #a4a4a4;
+    color: white;
+}
+
 .sub-header .right-section {
     align-items: center;
     gap: 20px;

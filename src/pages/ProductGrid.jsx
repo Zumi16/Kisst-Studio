@@ -3,6 +3,14 @@ import Modal from "../components/Modal";
 
 export function ProductGrid({ selectedId, setSelected, setCart, finalPrice, visible }) {
     const [addedProductId, setAddedProductId] = useState(null)
+    const [currentPage, setCurrentPage] = useState(1);
+
+    const ITEM_PER_PAGE = 30; // Dami ng items kada page
+    const totalPages = Math.max(1, Math.ceil(visible.length / ITEM_PER_PAGE));
+    const startIndex = (currentPage - 1) * ITEM_PER_PAGE;
+    const endIndex = startIndex + ITEM_PER_PAGE;
+
+    const paginatedProducts = visible.slice(startIndex, endIndex)
     //Review this kung pano naseselect yung specific na product sobrang nakakalito!
     // ===
     function handleAddToCart(e, cartProduct, quantity) {
@@ -37,36 +45,55 @@ export function ProductGrid({ selectedId, setSelected, setCart, finalPrice, visi
             setAddedProductId(null);
         }, 3000);
     }
+
     return (
-        <div className="product-grid">
-            {visible.map((product) => {
+        <div className="page-body">
+            {totalPages > 1 && (
+                <div className="pagination-actions">
+                    <button disabled={currentPage === 1} onClick={() => setCurrentPage(prev => prev - 1)}>Previous</button>
+                    <p>{currentPage} of {totalPages}</p>
+                    <button disabled={currentPage === totalPages} onClick={() => setCurrentPage(prev => prev + 1)}>Next</button>
+                </div>
+            )}
 
-                return (
-                    <div className="product" key={product.id} onClick={() => setSelected(product)}>
-                        {/* <p>Description: {product.description}</p> */}
-                        <div className="product-detail">
-                            <img src={product.thumbnail} />
-                            <h1>{product.title}</h1>
-                            <p>Category: {product.category}</p>
-                            <p>Rating: {product.rating}</p>
-                            <p>Price: ${finalPrice(product).toFixed(2)} - ${product.price} </p>
-                            <p>Stock: {product.stock}</p>
-                        </div>
-                        <div className="product-action">
-                            {addedProductId === product.id && <p>Added to cart!</p>}
-                            <button className="addtocart-btn" onClick={(e) => handleAddToCart(e, product, 1)}>Add to cart</button>
-                        </div>
-                    </div>
-                )
-            })}
+            <div className="product-grid">
+                {paginatedProducts.map((product) => {
 
-            {selectedId && (
-                <Modal
-                    handleAddToCart={handleAddToCart}
-                    selectedId={selectedId}
-                    setSelected={setSelected}
-                    addedProductId={addedProductId}
-                />
+                    return (
+                        <div className="product" key={product.id} onClick={() => setSelected(product)}>
+                            {/* <p>Description: {product.description}</p> */}
+                            <div className="product-detail">
+                                <img src={product.thumbnail} />
+                                <h1>{product.title}</h1>
+                                <p>Category: {product.category}</p>
+                                <p>Rating: {product.rating}</p>
+                                <p>Price: ${finalPrice(product).toFixed(2)} - ${product.price} </p>
+                                <p>Stock: {product.stock}</p>
+                            </div>
+                            <div className="product-action">
+                                {addedProductId === product.id && <p>Added to cart!</p>}
+                                <button className="addtocart-btn" onClick={(e) => handleAddToCart(e, product, 1)}>Add to cart</button>
+                            </div>
+                        </div>
+                    )
+                })}
+
+                {selectedId && (
+                    <Modal
+                        handleAddToCart={handleAddToCart}
+                        selectedId={selectedId}
+                        setSelected={setSelected}
+                        addedProductId={addedProductId}
+                    />
+                )}
+            </div>
+
+            {totalPages > 1 && (
+                <div className="pagination-actions">
+                    <button disabled={currentPage === 1} onClick={() => setCurrentPage(prev => prev - 1)}>Previous</button>
+                    <p>{currentPage} of {totalPages}</p>
+                    <button disabled={currentPage === totalPages} onClick={() => setCurrentPage(prev => prev + 1)}>Next</button>
+                </div>
             )}
         </div>
     )

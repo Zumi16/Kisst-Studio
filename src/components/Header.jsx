@@ -96,7 +96,7 @@ export function Header({ products, total, cart, setCart, categories, selectedCat
                         <input type='checkbox' checked={isInStock} onChange={handleInStockClick}/>
                         <label>In stock only</label>
                     </div>
-                    <button onClick={handleClearFilter}>Clear all</button>
+                    <button className='clear-all' onClick={handleClearFilter}>Clear all</button>
                 </div>
                 <div className='right-section'>
                     <input 

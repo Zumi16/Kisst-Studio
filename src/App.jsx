@@ -33,10 +33,11 @@ function App() {
       if (sortBy === "name-asc") return a.title.localeCompare(b.title);
       return 0;
     });
+  
 
   useEffect(() => {
     const getProducts = async () => {
-      const response = await axios.get('https://dummyjson.com/products');
+      const response = await axios.get('https://dummyjson.com/products?limit=0');
       const productData = response.data.products;
       const productTotal = response.data.total;
       setProducts(productData);
@@ -45,7 +46,6 @@ function App() {
     getProducts();
   }, [])
 
-  console.log(visible)
   return (
     <>
       <HomePage
