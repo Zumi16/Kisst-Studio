@@ -33,9 +33,11 @@
 .sub-header .left-section {
     display: flex;
     gap: 20px;
+    align-items: center;
 }
 
 .sub-header .right-section {
+    align-items: center;
     gap: 20px;
 }
 
@@ -76,12 +78,10 @@
     font-family: Arial, sans-serif;
 }
 .dropdown-container button {
-    background-color: #007bff;
-    color: white;
     padding: 10px 16px;
     font-size: 16px;
-    border: none;
-    border-radius: 4px;
+    border: solid 2px gray;
+    border-radius: 20px;
     cursor: pointer;
     display: flex;
     justify-content: space-between;

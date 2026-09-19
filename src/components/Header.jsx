@@ -61,7 +61,7 @@ export function Header({ products, total, cart, setCart, categories, selectedCat
             <div className='sub-header'>
                 <div className='left-section'>
                     <div className='dropdown-container'>
-                        <button onClick={() => toggleDropdown('category')}>Category</button>
+                        <button onClick={() => toggleDropdown('category')}>{selectedCategories === "all" ? "Select Category" : selectedCategories}</button>
                         {openDropdown === 'category' && (
                             <ul className='dropdown-menu'>
                                 {categories.map((category) => {
@@ -71,7 +71,7 @@ export function Header({ products, total, cart, setCart, categories, selectedCat
                         )}
                     </div>
                     <div className='dropdown-container'>
-                        <button onClick={() => toggleDropdown('sort')}>Sort</button>
+                        <button onClick={() => toggleDropdown('sort')}>{sortBy}</button>
                         {openDropdown === 'sort' && (
                             <ul className='dropdown-menu' >
                                 {sortOptions.map((option) => {
