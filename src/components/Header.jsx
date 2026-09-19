@@ -3,7 +3,7 @@ import './Header.css'
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import CartPanel from './CartPanel';
 
-export function Header({ products, total, cart, setCart, categories, setSelectedCategories, sortOptions, setSortBy, maxPrice, setMaxPrice, search, setSearch, isInStock, setIsInStock}) {
+export function Header({ products, total, cart, setCart, categories, selectedCategories, setSelectedCategories, sortOptions, sortBy, setSortBy, maxPrice, setMaxPrice, search, setSearch, isInStock, setIsInStock}) {
     const [isCartOpen, setIsCartOpen] = useState(false);
     const [openDropdown, setOpenDropdown] = useState(null);
     const INITIAL_FILTERS = {
@@ -45,6 +45,7 @@ export function Header({ products, total, cart, setCart, categories, setSelected
         setMaxPrice(INITIAL_FILTERS.maxPrice);
         setIsInStock(INITIAL_FILTERS.isInStock);
     }
+
 
     return (
         <header>
@@ -108,9 +109,25 @@ export function Header({ products, total, cart, setCart, categories, setSelected
             </div>
             <div className='result-header'>
                 <p>Showing {products.length} out of {total} products.</p>
-                <div className='category-selected'>
-                    <p>Category 1</p>
-                    <p>Category 2</p>
+                <div className='filter-selected'>
+                    {selectedCategories !== INITIAL_FILTERS.category && 
+                    <div className='filter-tag'>
+                        {selectedCategories}
+                        <button onClick={() => setSelectedCategories(INITIAL_FILTERS.category)}>x</button>
+                    </div>}
+
+                    { sortBy !== INITIAL_FILTERS.sortBy &&
+                    <div className='filter-tag'>
+                        {sortBy}
+                        <button onClick={() => setSortBy(INITIAL_FILTERS.sortBy)}>x</button>
+                    </div> }
+
+                    {maxPrice !== INITIAL_FILTERS.maxPrice &&
+                    <div className='filter-tag'>
+                        under ${maxPrice}
+                        <button onClick={() => setMaxPrice(INITIAL_FILTERS.maxPrice)}>x</button>
+                    </div>
+                    }
                 </div>
             </div>
 

@@ -55,9 +55,18 @@
     background: rgb(240, 240, 240);
 }
 
-.category-selected {
+.filter-selected {
     display: flex;
-    gap: 20px;
+    gap: 10px;
+}
+
+.filter-tag {
+    display: flex;
+    gap: 10px;   
+    padding: 2px 15px;
+    border-radius: 20px;
+    background: #989898;
+    color: white;
 }
 
 /* dropdown */

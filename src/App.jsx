@@ -54,10 +54,12 @@ function App() {
         selectedId={selectedId}
         setSelected={setSelected}
         categories={categories}
+        selectedCategories={selectedCategories}
         setSelectedCategories={setSelectedCategories}
         visible={visible}
         finalPrice={finalPrice}
         sortOptions={sortOptions}
+        sortBy={sortBy}
         setSortBy={setSortBy}
         maxPrice={maxPrice}
         setMaxPrice={setMaxPrice}

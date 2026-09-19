@@ -3,7 +3,7 @@ import './HomePage.css'
 import ProductGrid from "./ProductGrid";
 import { useState } from "react";
 
-function HomePage({ products, total, selectedId, setSelected, categories, setSelectedCategories, visible, finalPrice, sortOptions, setSortBy, maxPrice, setMaxPrice, search, setSearch, isInStock, setIsInStock}) {
+function HomePage({ products, total, selectedId, setSelected, categories, selectedCategories, setSelectedCategories, visible, finalPrice, sortOptions, sortBy, setSortBy, maxPrice, setMaxPrice, search, setSearch, isInStock, setIsInStock}) {
     const [cart, setCart] = useState([]);
 
     return (
@@ -14,8 +14,10 @@ function HomePage({ products, total, selectedId, setSelected, categories, setSel
                 cart={cart} 
                 setCart={setCart} 
                 categories={categories} 
+                selectedCategories={selectedCategories}
                 setSelectedCategories={setSelectedCategories}
                 sortOptions={sortOptions}
+                sortBy={sortBy}
                 setSortBy={setSortBy}
                 maxPrice={maxPrice}
                 setMaxPrice={setMaxPrice}
