@@ -49,7 +49,6 @@ function App() {
   return (
     <>
       <HomePage
-        products={products}
         total={total}
         selectedId={selectedId}
         setSelected={setSelected}

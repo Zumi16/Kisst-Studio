@@ -2,16 +2,9 @@ import { useState } from "react";
 import Modal from "../components/Modal";
 import './ProductGrid.css'
 
-export function ProductGrid({ selectedId, setSelected, setCart, finalPrice, visible }) {
+export function ProductGrid({ selectedId, setSelected, setCart, finalPrice, currentPage, setCurrentPage, totalPages, paginatedProducts }) {
     const [addedProductId, setAddedProductId] = useState(null)
-    const [currentPage, setCurrentPage] = useState(1);
 
-    const ITEM_PER_PAGE = 30; // Dami ng items kada page
-    const totalPages = Math.max(1, Math.ceil(visible.length / ITEM_PER_PAGE));
-    const startIndex = (currentPage - 1) * ITEM_PER_PAGE;
-    const endIndex = startIndex + ITEM_PER_PAGE;
-
-    const paginatedProducts = visible.slice(startIndex, endIndex)
     //Review this kung pano naseselect yung specific na product sobrang nakakalito!
     // ===
     function handleAddToCart(e, cartProduct, quantity) {

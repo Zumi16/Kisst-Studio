@@ -3,7 +3,7 @@ import './Header.css'
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import CartPanel from './CartPanel';
 
-export function Header({ products, total, cart, setCart, categories, selectedCategories, setSelectedCategories, sortOptions, sortBy, setSortBy, maxPrice, setMaxPrice, search, setSearch, isInStock, setIsInStock}) {
+export function Header({ total, cart, setCart, categories, selectedCategories, setSelectedCategories, sortOptions, sortBy, setSortBy, maxPrice, setMaxPrice, search, setSearch, isInStock, setIsInStock, paginatedProducts}) {
     const [isCartOpen, setIsCartOpen] = useState(false);
     const [openDropdown, setOpenDropdown] = useState(null);
     const INITIAL_FILTERS = {
@@ -108,7 +108,7 @@ export function Header({ products, total, cart, setCart, categories, selectedCat
                 </div>
             </div>
             <div className='result-header'>
-                <p>Showing {products.length} out of {total} products.</p>
+                <p>Showing {paginatedProducts.length} out of {total} products.</p>
                 <div className='filter-selected'>
                     {selectedCategories !== INITIAL_FILTERS.category && 
                     <div className='filter-tag'>
