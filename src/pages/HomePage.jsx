@@ -32,6 +32,7 @@ function HomePage({ total, selectedId, setSelected, categories, selectedCategori
                 setSearch={setSearch}
                 isInStock={isInStock}
                 setIsInStock={setIsInStock}
+                setCurrentPage={setCurrentPage}
                 paginatedProducts={paginatedProducts}
             />
 

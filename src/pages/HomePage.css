@@ -8,6 +8,13 @@
     gap: 30px;
 }
 
+.empty-grid {
+    display: flex;
+    min-height: 55vh;
+    justify-content: center;
+    align-items: center;
+}
+
 /* Product */
 .product {
     padding: 15px;
