@@ -56,7 +56,6 @@ export function Header({ total, cart, setCart, categories, selectedCategories, s
                 </div>
                 <div className='right-section' onClick={openCartPanel}>
                     <ShoppingCartOutlinedIcon fontSize='large' />
-                    <p>Cart</p>
                 </div>
             </div>
             <div className='sub-header'>
@@ -82,9 +81,10 @@ export function Header({ total, cart, setCart, categories, selectedCategories, s
                          )}
                     </div>
                     <div>
-                        <div>
+                        <div className='price-slider'>
                             <label>Max Price: ${maxPrice}</label>
-                            <input 
+                            <input
+                                className='range-slider'
                                 type='range' 
                                 min='0' 
                                 max='2500'
@@ -93,7 +93,7 @@ export function Header({ total, cart, setCart, categories, selectedCategories, s
                             />
                         </div>
                     </div>
-                    <div>
+                    <div className='in-stock-checkbox'>
                         <input type='checkbox' checked={isInStock} onChange={handleInStockClick}/>
                         <label>In stock only</label>
                     </div>

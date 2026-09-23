@@ -79,6 +79,7 @@
     justify-content: center;
     align-items: center;
 }
+
 .filter-tag button {
     color: rgb(10, 10, 10);
     font-size: 0.8rem;
@@ -153,4 +154,59 @@
 
     scrollbar-width: thin;
     scrollbar-color: #cbd5e1 transparent;
+}
+
+/* range slider */
+.price-slider {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+.range-slider {
+    min-width: 100px;
+    width: 200px;
+    appearance: none;
+    background: transparent;
+    cursor: pointer;
+    pointer-events: auto;
+}
+
+/* 1. The Track (Chrome, Safari, Edge) */
+.range-slider::-webkit-slider-runnable-track {
+    height: 4px;
+    background: #cbd5e1;
+    border-radius: 2px;
+}
+
+/* 2. The Thumb / Handle (Chrome, Safari, Edge) */
+.range-slider::-webkit-slider-thumb {
+    appearance: none;
+    width: 10px;
+    height: 16px;
+    background: #1e1e1e;
+    margin-top: -6px;
+    /* Centers the thumb vertically on the thin track */
+}
+
+/* 3. The Track (Firefox) */
+.range-slider::-moz-range-track {
+    height: 4px;
+    background: #b2b2b2;
+    border-radius: 2px;
+}
+
+/* 4. The Thumb / Handle (Firefox) */
+.range-slider::-moz-range-thumb {
+    width: 16px;
+    height: 16px;
+    background: #3b82f6;
+    border: none;
+    border-radius: 50%;
+}
+
+
+/* In stock checkbox */
+.in-stock-checkbox {
+    display: flex;
+    gap: 10px
 }

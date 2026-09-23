@@ -1,6 +1,6 @@
 import './CartPanel.css'
-import CloseIcon from '@mui/icons-material/Close';
 import { getDiscountedPrice } from '../utils/format';
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 
 export function CartPanel({ isCartOpen, onClose, cart, setCart }) {
     const cartCount = cart.reduce((n, currentItem) => n + currentItem.quantity, 0)
@@ -51,43 +51,44 @@ export function CartPanel({ isCartOpen, onClose, cart, setCart }) {
             <div className={`panel-backdrop ${isCartOpen ? 'open' : ''}`}></div>
             <div className={`cart-panel ${isCartOpen ? 'open' : ''}`}>
                 <div className='cart-header'>
-                    <button className='close-panel' onClick={onClose}><CloseIcon /></button>
-                    <h2>Your Cart ({cartCount} Items)</h2>
+                    <button className='close-panel' onClick={onClose}>✕</button>
+                    <h2>Your Shopping Cart ({cartCount} Items)</h2>
                 </div>
                 <div className='cart-body'>
                     <div className='cart-container'>
-                        {/* Continue here */}
                         {cart.map((product) => {
                             return (
-                                <div className='cart-item' key={product.id}>
-                                    <img className='item-img' src={product.thumbnail} />
-                                    <div className='item-detail'>
-                                        <h3>{product.title}</h3>
+                                <div className='cart-item-container' key={product.id}>
+                                    <div className='cart-item'>
+                                        <img className='item-img' src={product.thumbnail} />
+                                        <div className='item-detail'>
+                                            <h3>{product.title}</h3>
 
-                                        <div className='pricetoquantity-detail'>
-                                            <p>${product.price}</p>
-                                            <div className='quantity-container'>
-                                                <button className='quantity-btn' onClick={() => handleDecrease(product.id)}>-</button>
-                                                {product.quantity}
-                                                <button className='quantity-btn' onClick={() => handleIncrease(product.id)}>+</button>
+                                            <div className='pricetoquantity-detail'>
+                                                <p>${product.price}</p>
+                                                <div className='quantity-container'>
+                                                    <button className='cart-quantity-btn' onClick={() => handleDecrease(product.id)}>-</button>
+                                                    <div className='quantity-box'>{product.quantity}</div>
+                                                    <button className='cart-quantity-btn' onClick={() => handleIncrease(product.id)}>+</button>
+                                                </div>
+                                                <p>${product.price * product.quantity}</p>
                                             </div>
-                                            <p>${product.price * product.quantity}</p>
                                         </div>
                                     </div>
-                                    <button className='remove-item' onClick={() => handleRemove(product.id)}>Remove</button>
+                                    <button className='remove-item' onClick={() => handleRemove(product.id)}><DeleteForeverIcon fontSize='large' /></button>
                                 </div>
                             )
                         })}
                     </div>
-                    <div className='total-container'>
-                        <div className='total-overall'>
-                            <p>Subtotal (before discount) ${total}</p>
-                            <p>You save ${totalSaved.toFixed(2)}</p>
-                            <p>Total ${finalDiscountedPrice.toFixed(2)}</p>
-                        </div>
-                        <div className='clear-container'>
-                            <button onClick={() => handleClearCart()}>Clear cart</button>
-                        </div>
+                </div>
+                <div className='total-container'>
+                    <div className='total-overall'>
+                        <label>Subtotal (before discount): <p className='before-discount'>${total}</p></label>
+                        <label>You save <p className='total-saved'>${totalSaved.toFixed(2)}</p></label>
+                        <label>Total <p className='total-price'>${finalDiscountedPrice.toFixed(2)}</p></label>
+                    </div>
+                    <div className='clear-container'>
+                        <button onClick={() => handleClearCart()}>Clear cart</button>
                     </div>
                 </div>
             </div>
