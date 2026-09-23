@@ -89,6 +89,7 @@ export function ProductDetail({ selectedId, handleAddToCart, addedProductId }) {
                 </div>
 
                 <div className="reviews-container">
+                    <h2>Product Reviews</h2>
                     {selectedId.reviews.map((reviews, index) => {
                         return (
                             <div className="reviews" key={index}>
