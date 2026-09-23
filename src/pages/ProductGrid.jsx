@@ -81,7 +81,7 @@ export function ProductGrid({ selectedId, setSelected, setCart, finalPrice, curr
                         addedProductId={addedProductId}
                     />
                 )}
-            </div>) : <div className="empty-grid"><p>There are no items.</p></div>}
+            </div>) : <div className="empty-grid"><p>We couldn't find any items matching your search or filters.</p></div>}
 
             {totalPages >= 1 && (
                 <div className="pagination-actions">

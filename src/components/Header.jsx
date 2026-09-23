@@ -114,19 +114,19 @@ export function Header({ total, cart, setCart, categories, selectedCategories, s
                     {selectedCategories !== INITIAL_FILTERS.category && 
                     <div className='filter-tag'>
                         {selectedCategories}
-                        <button onClick={() => setSelectedCategories(INITIAL_FILTERS.category)}>x</button>
+                        <button onClick={() => setSelectedCategories(INITIAL_FILTERS.category)}>✕</button>
                     </div>}
 
                     { sortBy !== INITIAL_FILTERS.sortBy &&
                     <div className='filter-tag'>
                         {sortBy}
-                        <button onClick={() => setSortBy(INITIAL_FILTERS.sortBy)}>x</button>
+                        <button onClick={() => setSortBy(INITIAL_FILTERS.sortBy)}>✕</button>
                     </div> }
 
                     {maxPrice !== INITIAL_FILTERS.maxPrice &&
                     <div className='filter-tag'>
                         under ${maxPrice}
-                        <button onClick={() => setMaxPrice(INITIAL_FILTERS.maxPrice)}>x</button>
+                        <button onClick={() => setMaxPrice(INITIAL_FILTERS.maxPrice)}>✕</button>
                     </div>
                     }
                 </div>

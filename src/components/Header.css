@@ -71,19 +71,28 @@
 
 .filter-tag {
     display: flex;
-    gap: 10px;   
+    gap: 10px;
     padding: 2px 15px;
     border-radius: 20px;
     background: #989898;
     color: white;
+    justify-content: center;
+    align-items: center;
+}
+.filter-tag button {
+    color: rgb(10, 10, 10);
+    font-size: 0.8rem;
+    font-weight: 800;
 }
 
 /* dropdown */
 .dropdown-container {
-    position: relative; /* CRITICAL: Enables absolute positioning for dropdown-menu */
+    position: relative;
+    /* CRITICAL: Enables absolute positioning for dropdown-menu */
     display: inline-block;
     font-family: Arial, sans-serif;
 }
+
 .dropdown-container button {
     padding: 10px 16px;
     font-size: 16px;
@@ -97,15 +106,51 @@
 }
 
 .dropdown-menu {
+    display: flex;
+    flex-direction: column;
     position: absolute;
     top: 100%;
     left: 0;
     background-color: white;
-    min-width: 160px;
+    min-width: 180px;
     box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.15);
     border-radius: 4px;
-    padding: 0;
+    border: 1px solid gray;
+    padding: 5px 10px;
     margin: 4px 0 0 0;
+    gap: 5px;
     list-style: none;
     z-index: 1000;
+    max-height: 300px;
+    overflow-y: auto;
+
+    /* scrollbar */
+    &::-webkit-scrollbar {
+        width: 6px;
+    }
+
+    &::-webkit-scrollbar-track {
+        background: transparent;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: #cbd5e1;
+        border-radius: 10px;
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+        background: #94a3b8;
+    }
+
+    &::-webkit-scrollbar-button:single-button,
+    &::-webkit-scrollbar-button:increment,
+    &::-webkit-scrollbar-button:decrement {
+        display: none;
+        height: 0;
+        width: 0;
+        background-color: transparent;
+    }
+
+    scrollbar-width: thin;
+    scrollbar-color: #cbd5e1 transparent;
 }
