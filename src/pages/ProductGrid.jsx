@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Modal from "../components/Modal";
 import './ProductGrid.css'
+import { Product } from "../components/Product";
 
 export function ProductGrid({ selectedId, setSelected, setCart, finalPrice, currentPage, setCurrentPage, totalPages, paginatedProducts }) {
     const [addedProductId, setAddedProductId] = useState(null)
@@ -52,26 +53,13 @@ export function ProductGrid({ selectedId, setSelected, setCart, finalPrice, curr
 
             {paginatedProducts.length > 0 ? (
             <div className="product-grid">
-                {paginatedProducts.map((product) => {
-                        return (
-                            <div className="product" key={product.id} onClick={() => setSelected(product)}>
-                                {/* <p>Description: {product.description}</p> */}
-                                <div className="product-detail">
-                                    <img src={product.thumbnail} />
-                                    <h1>{product.title}</h1>
-                                    <p>Category: {product.category}</p>
-                                    <p>Rating: {product.rating}</p>
-                                    <p>Price: ${finalPrice(product).toFixed(2)} - ${product.price} </p>
-                                    <p>Stock: {product.stock}</p>
-                                </div>
-                                <div className="product-action">
-                                    {addedProductId === product.id && <p>Added to cart!</p>}
-                                    <button className="addtocart-btn" onClick={(e) => handleAddToCart(e, product, 1)}>Add to cart</button>
-                                </div>
-                            </div>
-                        )
-                    })
-                }
+                <Product
+                    handleAddToCart={handleAddToCart}
+                    setSelected={setSelected}
+                    addedProductId={addedProductId}
+                    paginatedProducts={paginatedProducts} 
+                    finalPrice={finalPrice}
+                />
 
                 {selectedId && (
                     <Modal
