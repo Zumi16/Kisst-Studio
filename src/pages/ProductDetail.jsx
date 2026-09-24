@@ -80,8 +80,10 @@ export function ProductDetail({ selectedId, handleAddToCart, addedProductId }) {
 
                 <div className="action-buttons">
                     <div className="quantity-picker">
-                        <input className="quantity-input" type="number" value={quantity} readOnly />
                         <button className="quantity-btn" onClick={handleDecrement}>-</button>
+                        <div className="quantity-box">
+                            <input className="quantity-input" type="number" value={quantity} readOnly />
+                        </div>
                         <button className="quantity-btn" onClick={handleIncrement}>+</button>
                     </div>
                     {addedProductId === selectedId.id && <p className="added-to-cart"> Added to cart!</p>}
