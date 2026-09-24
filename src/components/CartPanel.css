@@ -89,6 +89,8 @@
     padding: 10px;
     background: white;
     width: 100%;
+    border-radius: 5px 0 0 5px;
+    cursor: pointer;
 }
 
 .item-img {
@@ -139,6 +141,7 @@
     background: #ff5353;
     color: white;
     padding: 0 5px;
+    border-radius: 0 5px 5px 0;
 }
 
 /* Total Container */
@@ -157,7 +160,7 @@
 }
 .total-overall label {
     padding: 3px 10px;
-    border-bottom: 2px dotted #c6c6c6;
+    border-bottom: 1px dashed #c6c6c6;
     display: flex;
     gap: 10px;
     align-items: center;
