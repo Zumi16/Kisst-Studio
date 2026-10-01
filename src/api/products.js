@@ -10,7 +10,7 @@ export const getProducts = async () => {
 
 export const getCategories = async () => {
     const { productData } = await getProducts();
-    const productCategories = [...new Set(productData.map((product) => product.category))];
+    const productCategories = ["all", ...new Set(productData.map((product) => product.category))];
 
     return { productCategories };
 }

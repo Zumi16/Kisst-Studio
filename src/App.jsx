@@ -3,10 +3,12 @@ import { getCategories, getProducts } from './api/products'
 import './App.css'
 import HomePage from './pages/HomePage'
 import { getDiscountedPrice } from './utils/format'
+import { LoadingScreen } from './components/LoadingScreen'
 
 function App() {
-  const [products, setProducts] = useState([]);
-  const [categories, setCategories] = useState([]);
+  const [products, setProducts] = useState([]); // from the API
+  const [categories, setCategories] = useState([]); // from the API
+  const [loading, setLoading] = useState(true);
   const [total, setTotal] = useState([]);
   const [selectedId, setSelected] = useState(null);
   const [selectedCategories, setSelectedCategories] = useState("all");
@@ -37,6 +39,8 @@ function App() {
 
   useEffect(() => {
     const loadProducts = async () => {
+      setLoading(true);
+
       try {
         const { productData, productTotal } = await getProducts();
         const { productCategories } = await getCategories();
@@ -46,6 +50,8 @@ function App() {
         setCategories(productCategories);
       } catch (error) {
         console.error("Could not load products", error)
+      } finally {
+        setLoading(false)
       }
     }
 
@@ -54,25 +60,29 @@ function App() {
 
   return (
     <>
-      <HomePage
-        total={total}
-        selectedId={selectedId}
-        setSelected={setSelected}
-        categories={categories}
-        selectedCategories={selectedCategories}
-        setSelectedCategories={setSelectedCategories}
-        visible={visible}
-        finalPrice={finalPrice}
-        sortOptions={sortOptions}
-        sortBy={sortBy}
-        setSortBy={setSortBy}
-        maxPrice={maxPrice}
-        setMaxPrice={setMaxPrice}
-        search={search}
-        setSearch={setSearch}
-        isInStock={isInStock}
-        setIsInStock={setIsInStock}
-      />
+      {loading ? (
+        <LoadingScreen />
+      ) : (
+        <HomePage
+          total={total}
+          selectedId={selectedId}
+          setSelected={setSelected}
+          categories={categories}
+          selectedCategories={selectedCategories}
+          setSelectedCategories={setSelectedCategories}
+          visible={visible}
+          finalPrice={finalPrice}
+          sortOptions={sortOptions}
+          sortBy={sortBy}
+          setSortBy={setSortBy}
+          maxPrice={maxPrice}
+          setMaxPrice={setMaxPrice}
+          search={search}
+          setSearch={setSearch}
+          isInStock={isInStock}
+          setIsInStock={setIsInStock}
+        />
+      )}
     </>
   )
 }
