@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react'
-import { getProducts } from './api/products'
+import { getCategories, getProducts } from './api/products'
 import './App.css'
 import HomePage from './pages/HomePage'
 import { getDiscountedPrice } from './utils/format'
 
 function App() {
   const [products, setProducts] = useState([]);
+  const [categories, setCategories] = useState([]);
   const [total, setTotal] = useState([]);
   const [selectedId, setSelected] = useState(null);
   const [selectedCategories, setSelectedCategories] = useState("all");
@@ -15,7 +16,7 @@ function App() {
   const [isInStock, setIsInStock] = useState(false);
 
   const sortOptions = ["featured", "price-asc", "price-desc", "name-asc"]
-  const categories = ["all", ...new Set(products.map((p) => p.category))]
+  //const categories = ["all", ...new Set(products.map((p) => p.category))]
 
   const finalPrice = (product) => getDiscountedPrice(product.price, product.discountPercentage);
   // const filteredProducts = selectedCategories === "all" ? products : products.filter((product) => product.category === selectedCategories)
@@ -34,14 +35,15 @@ function App() {
       return 0;
     });
 
-
   useEffect(() => {
     const loadProducts = async () => {
       try {
         const { productData, productTotal } = await getProducts();
+        const { productCategories } = await getCategories();
 
         setProducts(productData);
         setTotal(productTotal);
+        setCategories(productCategories);
       } catch (error) {
         console.error("Could not load products", error)
       }
