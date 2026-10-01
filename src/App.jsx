@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import axios from 'axios'
+import { getProducts } from './api/products'
 import './App.css'
 import HomePage from './pages/HomePage'
 import { getDiscountedPrice } from './utils/format'
@@ -12,7 +12,7 @@ function App() {
   const [sortBy, setSortBy] = useState("featured")
   const [maxPrice, setMaxPrice] = useState(1000);
   const [search, setSearch] = useState("");
-  const [isInStock, setIsInStock] = useState (false);
+  const [isInStock, setIsInStock] = useState(false);
 
   const sortOptions = ["featured", "price-asc", "price-desc", "name-asc"]
   const categories = ["all", ...new Set(products.map((p) => p.category))]
@@ -21,29 +21,33 @@ function App() {
   // const filteredProducts = selectedCategories === "all" ? products : products.filter((product) => product.category === selectedCategories)
   const visible = [...products]
     .filter((product) => {
-      const categoryMatch = selectedCategories === "all" || product.category === selectedCategories 
+      const categoryMatch = selectedCategories === "all" || product.category === selectedCategories
       const priceMatch = finalPrice(product) <= maxPrice
       const searchMatch = product.title.toLowerCase().includes(search.toLowerCase());
       const stockMatch = !isInStock || product.stock > 0
 
-      return categoryMatch && priceMatch && searchMatch && stockMatch; 
+      return categoryMatch && priceMatch && searchMatch && stockMatch;
     }).sort((a, b) => {
       if (sortBy === "price-asc") return finalPrice(a) - finalPrice(b);
       if (sortBy === "price-desc") return finalPrice(b) - finalPrice(a);
       if (sortBy === "name-asc") return a.title.localeCompare(b.title);
       return 0;
     });
-  
+
 
   useEffect(() => {
-    const getProducts = async () => {
-      const response = await axios.get('https://dummyjson.com/products?limit=0');
-      const productData = response.data.products;
-      const productTotal = response.data.total;
-      setProducts(productData);
-      setTotal(productTotal)
+    const loadProducts = async () => {
+      try {
+        const { productData, productTotal } = await getProducts();
+
+        setProducts(productData);
+        setTotal(productTotal);
+      } catch (error) {
+        console.error("Could not load products", error)
+      }
     }
-    getProducts();
+
+    loadProducts();
   }, [])
 
   return (
