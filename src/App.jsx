@@ -3,6 +3,7 @@ import { getCategories, getProducts } from './api/products'
 import './App.css'
 import HomePage from './pages/HomePage'
 import { getDiscountedPrice } from './utils/format'
+import axios from 'axios'
 
 function App() {
   const [products, setProducts] = useState([]); // from the API
@@ -38,24 +39,30 @@ function App() {
     });
 
   useEffect(() => {
+    const controller = new AbortController();
     const loadProducts = async () => {
       setLoading(true);
 
       try {
-        const { productData, productTotal } = await getProducts();
-        const { productCategories } = await getCategories();
+        const { productData, productTotal } = await getProducts(controller.signal);
+        const { productCategories } = await getCategories(controller.signal);
 
         setProducts(productData);
         setTotal(productTotal);
         setCategories(productCategories);
       } catch (error) {
-        setError(error.message)
+        if (!axios.isCancel(error)) {
+          setError(error.message)
+        }
       } finally {
-        setLoading(false)
+        if (!controller.signal.aborted) {
+          setLoading(false)
+        }
       }
     }
 
     loadProducts();
+    return () => controller.abort();
   }, [])
 
   return (
