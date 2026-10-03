@@ -9,6 +9,7 @@ function App() {
   const [products, setProducts] = useState([]); // from the API
   const [categories, setCategories] = useState([]); // from the API
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   const [total, setTotal] = useState([]);
   const [selectedId, setSelected] = useState(null);
   const [selectedCategories, setSelectedCategories] = useState("all");
@@ -49,7 +50,7 @@ function App() {
         setTotal(productTotal);
         setCategories(productCategories);
       } catch (error) {
-        console.error("Could not load products", error)
+        setError(error.message)
       } finally {
         setLoading(false)
       }
@@ -64,6 +65,7 @@ function App() {
         <LoadingScreen />
       ) : (
         <HomePage
+          error={error}
           total={total}
           selectedId={selectedId}
           setSelected={setSelected}

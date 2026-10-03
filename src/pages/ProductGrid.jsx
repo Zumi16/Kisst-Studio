@@ -3,7 +3,7 @@ import Modal from "../components/Modal";
 import './ProductGrid.css'
 import { Product } from "../components/Product";
 
-export function ProductGrid({ selectedId, setSelected, setCart, finalPrice, currentPage, setCurrentPage, totalPages, paginatedProducts }) {
+export function ProductGrid({ error, selectedId, setSelected, setCart, finalPrice, currentPage, setCurrentPage, totalPages, paginatedProducts }) {
     const [addedProductId, setAddedProductId] = useState(null)
 
     //Review this kung pano naseselect yung specific na product sobrang nakakalito!
@@ -41,6 +41,18 @@ export function ProductGrid({ selectedId, setSelected, setCart, finalPrice, curr
         }, 3000);
     }
 
+    if (error) {
+        return (
+            <div className="error-container">
+                <div className="message-container">
+                    <h3>Oops! Something went wrong!</h3>
+                    <p>{error}</p>
+                </div>
+                <button className="retry-btn" onClick={() => window.location.reload()}>Try again</button>
+            </div>
+        )
+    }
+
     return (
         <div className="page-body">
             {totalPages >= 1 && (
@@ -52,24 +64,24 @@ export function ProductGrid({ selectedId, setSelected, setCart, finalPrice, curr
             )}
 
             {paginatedProducts.length > 0 ? (
-            <div className="product-grid">
-                <Product
-                    handleAddToCart={handleAddToCart}
-                    setSelected={setSelected}
-                    addedProductId={addedProductId}
-                    paginatedProducts={paginatedProducts} 
-                    finalPrice={finalPrice}
-                />
-
-                {selectedId && (
-                    <Modal
+                <div className="product-grid">
+                    <Product
                         handleAddToCart={handleAddToCart}
-                        selectedId={selectedId}
                         setSelected={setSelected}
                         addedProductId={addedProductId}
+                        paginatedProducts={paginatedProducts}
+                        finalPrice={finalPrice}
                     />
-                )}
-            </div>) : <div className="empty-grid"><p>We couldn't find any items matching your search or filters.</p></div>}
+
+                    {selectedId && (
+                        <Modal
+                            handleAddToCart={handleAddToCart}
+                            selectedId={selectedId}
+                            setSelected={setSelected}
+                            addedProductId={addedProductId}
+                        />
+                    )}
+                </div>) : <div className="empty-grid"><p>We couldn't find any items matching your search or filters.</p></div>}
 
             {totalPages >= 1 && (
                 <div className="pagination-actions">

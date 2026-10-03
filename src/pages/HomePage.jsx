@@ -3,7 +3,7 @@ import './HomePage.css'
 import ProductGrid from "./ProductGrid";
 import { useState } from "react";
 
-function HomePage({ total, selectedId, setSelected, categories, selectedCategories, setSelectedCategories, visible, finalPrice, sortOptions, sortBy, setSortBy, maxPrice, setMaxPrice, search, setSearch, isInStock, setIsInStock }) {
+function HomePage({ error, total, selectedId, setSelected, categories, selectedCategories, setSelectedCategories, visible, finalPrice, sortOptions, sortBy, setSortBy, maxPrice, setMaxPrice, search, setSearch, isInStock, setIsInStock }) {
     const [cart, setCart] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
 
@@ -38,6 +38,7 @@ function HomePage({ total, selectedId, setSelected, categories, selectedCategori
 
             <div className="home-page">
                 <ProductGrid
+                    error={error}
                     selectedId={selectedId}
                     setSelected={setSelected}
                     setCart={setCart}
