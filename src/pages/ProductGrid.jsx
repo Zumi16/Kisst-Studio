@@ -2,8 +2,9 @@ import { useState } from "react";
 import Modal from "../components/Modal";
 import './ProductGrid.css'
 import { Product } from "../components/Product";
+import { LoadingScreen } from "../components/LoadingScreen";
 
-export function ProductGrid({ error, selectedId, setSelected, setCart, finalPrice, currentPage, setCurrentPage, totalPages, paginatedProducts }) {
+export function ProductGrid({ loading, error, selectedId, setSelected, setCart, finalPrice, currentPage, setCurrentPage, totalPages, paginatedProducts }) {
     const [addedProductId, setAddedProductId] = useState(null)
 
     //Review this kung pano naseselect yung specific na product sobrang nakakalito!
@@ -45,7 +46,7 @@ export function ProductGrid({ error, selectedId, setSelected, setCart, finalPric
         return (
             <div className="error-container">
                 <div className="message-container">
-                    <h3>Oops! Something went wrong!</h3>
+                    <h3>Could not load products.</h3>
                     <p>{error}</p>
                 </div>
                 <button className="retry-btn" onClick={() => window.location.reload()}>Try again</button>
@@ -54,43 +55,49 @@ export function ProductGrid({ error, selectedId, setSelected, setCart, finalPric
     }
 
     return (
-        <div className="page-body">
-            {totalPages >= 1 && (
-                <div className="pagination-actions">
-                    <button className="prev-page" disabled={currentPage === 1} onClick={() => setCurrentPage(prev => prev - 1)}>Previous</button>
-                    <p>Page {currentPage} of {totalPages}</p>
-                    <button className="next-page" disabled={currentPage === totalPages} onClick={() => setCurrentPage(prev => prev + 1)}>Next</button>
-                </div>
-            )}
-
-            {paginatedProducts.length > 0 ? (
-                <div className="product-grid">
-                    <Product
-                        handleAddToCart={handleAddToCart}
-                        setSelected={setSelected}
-                        addedProductId={addedProductId}
-                        paginatedProducts={paginatedProducts}
-                        finalPrice={finalPrice}
-                    />
-
-                    {selectedId && (
-                        <Modal
-                            handleAddToCart={handleAddToCart}
-                            selectedId={selectedId}
-                            setSelected={setSelected}
-                            addedProductId={addedProductId}
-                        />
+        <>
+            {loading ? (
+                <LoadingScreen />
+            ) : (
+                <div className="page-body">
+                    {totalPages >= 1 && (
+                        <div className="pagination-actions">
+                            <button className="prev-page" disabled={currentPage === 1} onClick={() => setCurrentPage(prev => prev - 1)}>Previous</button>
+                            <p>Page {currentPage} of {totalPages}</p>
+                            <button className="next-page" disabled={currentPage === totalPages} onClick={() => setCurrentPage(prev => prev + 1)}>Next</button>
+                        </div>
                     )}
-                </div>) : <div className="empty-grid"><p>We couldn't find any items matching your search or filters.</p></div>}
 
-            {totalPages >= 1 && (
-                <div className="pagination-actions">
-                    <button className="prev-page" disabled={currentPage === 1} onClick={() => setCurrentPage(prev => prev - 1)}>Previous</button>
-                    <p>Page {currentPage} of {totalPages}</p>
-                    <button className="next-page" disabled={currentPage === totalPages} onClick={() => setCurrentPage(prev => prev + 1)}>Next</button>
+                    {paginatedProducts.length > 0 ? (
+                        <div className="product-grid">
+                            <Product
+                                handleAddToCart={handleAddToCart}
+                                setSelected={setSelected}
+                                addedProductId={addedProductId}
+                                paginatedProducts={paginatedProducts}
+                                finalPrice={finalPrice}
+                            />
+
+                            {selectedId && (
+                                <Modal
+                                    handleAddToCart={handleAddToCart}
+                                    selectedId={selectedId}
+                                    setSelected={setSelected}
+                                    addedProductId={addedProductId}
+                                />
+                            )}
+                        </div>) : <div className="empty-grid"><p>We couldn't find any items matching your search or filters.</p></div>}
+
+                    {totalPages >= 1 && (
+                        <div className="pagination-actions">
+                            <button className="prev-page" disabled={currentPage === 1} onClick={() => setCurrentPage(prev => prev - 1)}>Previous</button>
+                            <p>Page {currentPage} of {totalPages}</p>
+                            <button className="next-page" disabled={currentPage === totalPages} onClick={() => setCurrentPage(prev => prev + 1)}>Next</button>
+                        </div>
+                    )}
                 </div>
             )}
-        </div>
+        </>
     )
 }
 

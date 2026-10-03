@@ -3,7 +3,6 @@ import { getCategories, getProducts } from './api/products'
 import './App.css'
 import HomePage from './pages/HomePage'
 import { getDiscountedPrice } from './utils/format'
-import { LoadingScreen } from './components/LoadingScreen'
 
 function App() {
   const [products, setProducts] = useState([]); // from the API
@@ -60,11 +59,8 @@ function App() {
   }, [])
 
   return (
-    <>
-      {loading ? (
-        <LoadingScreen />
-      ) : (
         <HomePage
+          loading={loading}
           error={error}
           total={total}
           selectedId={selectedId}
@@ -84,8 +80,6 @@ function App() {
           isInStock={isInStock}
           setIsInStock={setIsInStock}
         />
-      )}
-    </>
   )
 }
 
