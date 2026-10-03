@@ -1,0 +1,10 @@
+.price-container {
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+}
+.discount-percent { color: green; }
+
+.in-stock { color: green; }
+.low-stock { color: #d97706; }
+.out-of-stock { color: red; }
