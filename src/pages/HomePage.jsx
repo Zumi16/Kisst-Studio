@@ -42,6 +42,7 @@ function HomePage({ loading, error, total, selectedId, setSelected, categories, 
                     error={error}
                     selectedId={selectedId}
                     setSelected={setSelected}
+                    cart={cart}
                     setCart={setCart}
                     finalPrice={finalPrice}
                     currentPage={currentPage}

@@ -4,7 +4,7 @@ import './ProductGrid.css'
 import { Product } from "../components/Product";
 import { LoadingScreen } from "../components/LoadingScreen";
 
-export function ProductGrid({ loading, error, selectedId, setSelected, setCart, finalPrice, currentPage, setCurrentPage, totalPages, paginatedProducts }) {
+export function ProductGrid({ loading, error, selectedId, setSelected, cart, setCart, finalPrice, currentPage, setCurrentPage, totalPages, paginatedProducts }) {
     const [addedProductId, setAddedProductId] = useState(null)
 
     //Review this kung pano naseselect yung specific na product sobrang nakakalito!
@@ -71,6 +71,7 @@ export function ProductGrid({ loading, error, selectedId, setSelected, setCart, 
                     {paginatedProducts.length > 0 ? (
                         <div className="product-grid">
                             <Product
+                                cart={cart}
                                 handleAddToCart={handleAddToCart}
                                 setSelected={setSelected}
                                 addedProductId={addedProductId}
