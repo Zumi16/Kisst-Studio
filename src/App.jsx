@@ -18,6 +18,11 @@ function App() {
   const [search, setSearch] = useState("");
   const [isInStock, setIsInStock] = useState(false);
 
+  const highestPrice = Math.ceil(
+    Math.max ( 0, ...products.map((product) => product.price))
+  );
+
+  console.log(highestPrice)
   const sortOptions = ["featured", "price-asc", "price-desc", "name-asc"]
   //const categories = ["all", ...new Set(products.map((p) => p.category))]
 
@@ -27,7 +32,10 @@ function App() {
     .filter((product) => {
       const categoryMatch = selectedCategories === "all" || product.category === selectedCategories
       const priceMatch = finalPrice(product) <= maxPrice
-      const searchMatch = product.title.toLowerCase().includes(search.toLowerCase());
+      
+      const titleSearch = product.title.toLowerCase().includes(search.toLowerCase())
+      const brandSearch = String(product.brand || '').toLowerCase().includes(search.toLowerCase())
+      const searchMatch = titleSearch || brandSearch;
       const stockMatch = !isInStock || product.stock > 0
 
       return categoryMatch && priceMatch && searchMatch && stockMatch;
@@ -86,6 +94,7 @@ function App() {
           setSearch={setSearch}
           isInStock={isInStock}
           setIsInStock={setIsInStock}
+          highestPrice={highestPrice}
         />
   )
 }
