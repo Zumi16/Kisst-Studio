@@ -14,7 +14,6 @@ export function Product({ cart, handleAddToCart, setSelected, addedProductId, pa
             // ay existing na ba sa loob ng cart
             // pede mong iconsole log then lalabas ung mga items na naka add to cart na
             const cartItem = cart.find((item) => item.id === product.id)
-
             // si product.id naman ay nagbabago depende sa current product na niloloop ng paginatedProducts.map()
             // example:
             // Mascara = product.id 1
@@ -39,13 +38,21 @@ export function Product({ cart, handleAddToCart, setSelected, addedProductId, pa
             // kaya dito chinecheck lang natin kung may laman/existing si cartItem
             // kapag existing siya, ipapakita yung quantity niya -> "In cart (2)"
             // kapag undefined siya, ibig sabihin wala pa yung product sa cart -> "Add to cart"
-            
+
             return (
                 <div className="product" key={product.id} onClick={() => setSelected(product)}>
                     {/* <p>Description: {product.description}</p> */}
                     <div className="product-detail">
-                        <img src={product.thumbnail} />
-                        <h1>{product.title}</h1>
+                        <img 
+                            src={product.thumbnail} 
+                            onError={(e) => {
+                                e.currentTarget.onerror = null;
+                                e.currentTarget.src = "https://placehold.co/300x300";
+                            }}
+                            alt={`${product.title} product image`}
+                        />
+
+                        <h1 className='product-title'>{product.title}</h1>
                         <h5>{product.brand || "No Brand"}</h5>
                         <p>Category: {product.category}</p>
                         <p>Rating: {product.rating}</p>
