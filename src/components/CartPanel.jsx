@@ -56,6 +56,11 @@ export function CartPanel({ isCartOpen, onClose, cart, setCart }) {
                     <button className='close-panel' onClick={onClose}>✕</button>
                     <h2>Your Shopping Cart ({cartCount} Items)</h2>
                 </div>
+                {cart.length === 0 ? (
+                <div className='empty-cart'>
+                    <p>Your cart is empty.</p>
+                </div>
+                ) : <>
                 <div className='cart-body'>
                     <div className='cart-container'>
                         {cart.map((product) => {
@@ -93,6 +98,7 @@ export function CartPanel({ isCartOpen, onClose, cart, setCart }) {
                         <button onClick={() => handleClearCart()}>Clear cart</button>
                     </div>
                 </div>
+                </>}
             </div>
         </>
     )

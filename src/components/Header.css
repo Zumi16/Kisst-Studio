@@ -211,3 +211,9 @@
     display: flex;
     gap: 10px
 }
+
+.cart-trigger {
+    border: none;
+    background: transparent;
+    color: inherit;
+}

@@ -6,6 +6,7 @@ import CartPanel from './CartPanel';
 export function Header({ total, cart, setCart, categories, selectedCategories, setSelectedCategories, sortOptions, sortBy, setSortBy, maxPrice, setMaxPrice, search, setSearch, isInStock, setIsInStock, setCurrentPage, paginatedProducts, highestPrice}) {
     const [isCartOpen, setIsCartOpen] = useState(false);
     const [openDropdown, setOpenDropdown] = useState(null);
+    const cartCount = cart.reduce((total, item) => total + item.quantity, 0);
 
     const INITIAL_FILTERS = {
         search: "",
@@ -55,9 +56,10 @@ export function Header({ total, cart, setCart, categories, selectedCategories, s
                 <div className='left-section'>
                     <img className='logo' src='images/logo-white.png' />
                 </div>
-                <div className='right-section' onClick={openCartPanel}>
+                <button className='right-section cart-trigger' onClick={openCartPanel} aria-label={`Open cart with ${cartCount} items`}>
                     <ShoppingCartOutlinedIcon fontSize='large' />
-                </div>
+                    <span>Cart ({cartCount})</span>
+                </button>
             </div>
             <div className='sub-header'>
                 <div className='left-section'>

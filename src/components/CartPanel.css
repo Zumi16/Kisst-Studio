@@ -77,6 +77,15 @@
     scrollbar-width: none;
 }
 
+.empty-cart {
+    display: flex;
+    flex: 1;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    text-align: center;
+}
+
 /* Cart Item */
 .cart-item-container {
     position: relative;
