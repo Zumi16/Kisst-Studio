@@ -1,7 +1,7 @@
 import axios from "axios";
 
-export const getProducts = async (signal) => {
-    const response = await axios.get('https://dummyjson.com/products?limit=0', {signal});
+export const getProducts = async () => {
+    const response = await axios.get('https://dummyjson.com/products?limit=0');
     const productData = response.data.products;
     const productTotal = response.data.total;
 
@@ -9,8 +9,10 @@ export const getProducts = async (signal) => {
 }
 
 export const getCategories = async (signal) => {
-    const { productData } = await getProducts(signal);
-    const productCategories = ["all", ...new Set(productData.map((product) => product.category))];
+    const response = await axios.get('https://dummyjson.com/products/categories', { signal })
+    const categoriesData = response.data;
+
+    const productCategories = ["all", ...categoriesData.map((category) => category.slug)];
 
     return { productCategories };
 }

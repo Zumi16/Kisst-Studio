@@ -45,7 +45,7 @@ export function CartPanel({ isCartOpen, onClose, cart, setCart }) {
             setCart([]);
         }
     }
-    console.log(cart)
+
     return (
         <>
             <div className={`panel-backdrop ${isCartOpen ? 'open' : ''}`}></div>

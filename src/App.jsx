@@ -14,7 +14,7 @@ function App() {
   const [selectedId, setSelected] = useState(null);
   const [selectedCategories, setSelectedCategories] = useState("all");
   const [sortBy, setSortBy] = useState("featured")
-  const [maxPrice, setMaxPrice] = useState(1000);
+  const [maxPrice, setMaxPrice] = useState();
   const [search, setSearch] = useState("");
   const [isInStock, setIsInStock] = useState(false);
 
@@ -22,7 +22,6 @@ function App() {
     Math.max ( 0, ...products.map((product) => product.price))
   );
 
-  console.log(highestPrice)
   const sortOptions = ["featured", "price-asc", "price-desc", "name-asc"]
   //const categories = ["all", ...new Set(products.map((p) => p.category))]
 
@@ -52,7 +51,7 @@ function App() {
       setLoading(true);
 
       try {
-        const { productData, productTotal } = await getProducts(controller.signal);
+        const { productData, productTotal } = await getProducts();
         const { productCategories } = await getCategories(controller.signal);
 
         setProducts(productData);
