@@ -4,6 +4,12 @@
     gap: 25px;
 }
 
+.loading-body {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
 .products-container {
     display: flex;
     flex-direction: row;
@@ -38,6 +44,23 @@
 }
 
 .retry-btn {
+    padding: 10px 15px;
+    background-color: gray;
+    color: white;
+    border-radius: 10px;
+}
+
+.empty-grid {
+    flex-direction: column;
+    gap: 10px;
+    text-align: center;
+}
+
+.empty-grid p {
+    color: #717171;
+}
+
+.clear-filters-btn {
     padding: 10px 15px;
     background-color: gray;
     color: white;

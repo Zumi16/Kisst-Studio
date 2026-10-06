@@ -14,10 +14,20 @@ function HomePage({ loading, error, total, selectedId, setSelected, categories, 
 
     const paginatedProducts = visible.slice(startIndex, endIndex)
 
+    function handleClearFilters() {
+        setSearch("");
+        setSelectedCategories("all");
+        setSortBy("featured");
+        setMaxPrice(highestPrice);
+        setIsInStock(false);
+        setCurrentPage(1);
+    }
+
     return (
         <>
             <Header
                 total={total}
+                visibleCount={visible.length}
                 cart={cart}
                 setCart={setCart}
                 categories={categories}
@@ -35,6 +45,7 @@ function HomePage({ loading, error, total, selectedId, setSelected, categories, 
                 setCurrentPage={setCurrentPage}
                 paginatedProducts={paginatedProducts}
                 highestPrice={highestPrice}
+                onClearFilters={handleClearFilters}
             />
 
             <div className="home-page">
@@ -50,6 +61,7 @@ function HomePage({ loading, error, total, selectedId, setSelected, categories, 
                     setCurrentPage={setCurrentPage}
                     totalPages={totalPages}
                     paginatedProducts={paginatedProducts}
+                    onClearFilters={handleClearFilters}
                 />
             </div>
         </>

@@ -1,43 +1,26 @@
 import './LoadingScreen.css'
-import { products } from '../data/loadingdata';
+
+function SkeletonCard() {
+    return (
+        <div className="skeleton-card" aria-hidden="true">
+            <div className="skeleton skeleton-image"></div>
+            <div className="skeleton skeleton-brand"></div>
+            <div className="skeleton skeleton-title"></div>
+            <div className="skeleton skeleton-text"></div>
+            <div className="skeleton skeleton-text short"></div>
+            <div className="skeleton skeleton-price"></div>
+            <div className="skeleton skeleton-button"></div>
+        </div>
+    )
+}
+
 export function LoadingScreen() {
     return (
-            <div className="page-body">
-                <div className="pagination-actions">
-                    <button className="prev-page" >Previous</button>
-                    <p>Page 0 of 0</p>
-                    <button className="next-page">Next</button>
-                </div>
-
-                <div className="product-grid">
-                    {
-                        products.map((product) => {
-                            return (
-                                <div className="product">
-                                    {/* <p>Description: {product.description}</p> */}
-                                    <div className="product-detail">
-                                        <img src={product.thumbnail} />
-                                        <h1>{product.title}</h1>
-                                        <p>Category: {product.category}</p>
-                                        <p>Rating: {product.rating}</p>
-                                        <p>Price: ${product.price} </p>
-                                        <p>Stock: {product.stock}</p>
-                                    </div>
-                                    <div className="product-action">
-                                        <button className="addtocart-btn">Add to cart</button>
-                                    </div>
-                                </div>
-                            )
-                        })
-                    }
-                </div>
-
-                <div className="pagination-actions">
-                    <button className="prev-page" >Previous</button>
-                    <p>Page 0 of 0</p>
-                    <button className="next-page">Next</button>
-                </div>
-            </div>
+        <div className="product-grid" aria-busy="true" aria-label="Loading products">
+            {Array.from({ length: 8 }, (_, index) => (
+                <SkeletonCard key={index} />
+            ))}
+        </div>
     )
-
 }
+

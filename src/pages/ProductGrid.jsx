@@ -4,7 +4,7 @@ import './ProductGrid.css'
 import { Product } from "../components/Product";
 import { LoadingScreen } from "../components/LoadingScreen";
 
-export function ProductGrid({ loading, error, selectedId, setSelected, cart, setCart, finalPrice, currentPage, setCurrentPage, totalPages, paginatedProducts }) {
+export function ProductGrid({ loading, error, selectedId, setSelected, cart, setCart, finalPrice, currentPage, setCurrentPage, totalPages, paginatedProducts, onClearFilters }) {
     const [addedProductId, setAddedProductId] = useState(null)
 
     //Review this kung pano naseselect yung specific na product sobrang nakakalito!
@@ -57,10 +57,22 @@ export function ProductGrid({ loading, error, selectedId, setSelected, cart, set
     return (
         <>
             {loading ? (
-                <LoadingScreen />
+                <div className="loading-body">
+                    <div className="pagination-actions">
+                        <button className="prev-page" disabled={currentPage === 1} onClick={() => setCurrentPage(prev => prev - 1)}>Previous</button>
+                        <p>Page {currentPage} of {totalPages}</p>
+                        <button className="next-page" disabled={currentPage === totalPages} onClick={() => setCurrentPage(prev => prev + 1)}>Next</button>
+                    </div>
+                    <LoadingScreen />
+                    <div className="pagination-actions">
+                        <button className="prev-page" disabled={currentPage === 1} onClick={() => setCurrentPage(prev => prev - 1)}>Previous</button>
+                        <p>Page {currentPage} of {totalPages}</p>
+                        <button className="next-page" disabled={currentPage === totalPages} onClick={() => setCurrentPage(prev => prev + 1)}>Next</button>
+                    </div>
+                </div>
             ) : (
                 <div className="page-body">
-                    {totalPages >= 1 && (
+                    {totalPages > 1 && paginatedProducts.length > 0 && (
                         <div className="pagination-actions">
                             <button className="prev-page" disabled={currentPage === 1} onClick={() => setCurrentPage(prev => prev - 1)}>Previous</button>
                             <p>Page {currentPage} of {totalPages}</p>
@@ -87,9 +99,13 @@ export function ProductGrid({ loading, error, selectedId, setSelected, cart, set
                                     addedProductId={addedProductId}
                                 />
                             )}
-                        </div>) : <div className="empty-grid"><p>We couldn't find any items matching your search or filters.</p></div>}
+                        </div>) : <div className="empty-grid">
+                        <h2>No products match your filters.</h2>
+                        <p>Try changing your search, category, price, or stock filter.</p>
+                        <button className="clear-filters-btn" onClick={onClearFilters}>Clear all filters</button>
+                    </div>}
 
-                    {totalPages >= 1 && (
+                    {totalPages > 1 && paginatedProducts.length > 0 && (
                         <div className="pagination-actions">
                             <button className="prev-page" disabled={currentPage === 1} onClick={() => setCurrentPage(prev => prev - 1)}>Previous</button>
                             <p>Page {currentPage} of {totalPages}</p>
