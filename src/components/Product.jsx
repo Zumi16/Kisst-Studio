@@ -69,7 +69,7 @@ export function Product({ cart, handleAddToCart, setSelected, addedProductId, pa
                     <div className="product-action">
                         {addedProductId === product.id && <p>Added to cart!</p>}
                         {product.stock > 0
-                            ? <button className="addtocart-btn" onClick={(e) => handleAddToCart(e, product, 1)}>
+                            ? <button className="addtocart-btn" disabled={cartItem?.quantity >= product.stock} onClick={(e) => handleAddToCart(e, product, 1)}>
                                 {cartItem ? `In cart (${cartItem.quantity})` : "Add to cart"}
                             </button>
                             : <button disabled={true} className="addtocart-btn">Sold out</button>

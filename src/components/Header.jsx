@@ -11,7 +11,7 @@ export function Header({ total, cart, setCart, categories, selectedCategories, s
         search: "",
         category: "all",
         sortBy: "featured",
-        maxPrice: 1000,
+        maxPrice: highestPrice,
         isInStock: false,
     };
 
@@ -44,7 +44,7 @@ export function Header({ total, cart, setCart, categories, selectedCategories, s
         setSortBy(INITIAL_FILTERS.sortBy)
         setSearch(INITIAL_FILTERS.search);
         setSelectedCategories(INITIAL_FILTERS.category);
-        setMaxPrice(INITIAL_FILTERS.maxPrice);
+        setMaxPrice(highestPrice);
         setIsInStock(INITIAL_FILTERS.isInStock);
     }
 

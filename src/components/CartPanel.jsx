@@ -15,7 +15,9 @@ export function CartPanel({ isCartOpen, onClose, cart, setCart }) {
     function handleIncrease(productId) {
         setCart(cartItem => {
             return cartItem.map((item) =>
-                item.id === productId ? { ...item, quantity: item.quantity + 1 } : item
+                item.id === productId && item.quantity < item.stock
+                    ? { ...item, quantity: item.quantity + 1 }
+                    : item
             );
         })
     }
@@ -69,7 +71,7 @@ export function CartPanel({ isCartOpen, onClose, cart, setCart }) {
                                                 <div className='quantity-container'>
                                                     <button className='cart-quantity-btn' onClick={() => handleDecrease(product.id)}>-</button>
                                                     <div className='quantity-box'>{product.quantity}</div>
-                                                    <button className='cart-quantity-btn' onClick={() => handleIncrease(product.id)}>+</button>
+                                                    <button className='cart-quantity-btn' disabled={product.quantity >= product.stock} onClick={() => handleIncrease(product.id)}>+</button>
                                                 </div>
                                                 <p>${product.price * product.quantity}</p>
                                             </div>

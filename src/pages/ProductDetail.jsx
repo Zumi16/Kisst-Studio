@@ -6,7 +6,7 @@ export function ProductDetail({ selectedId, handleAddToCart, addedProductId }) {
     const [currentIndex, setCurrentIndex] = useState(0);
     const maxIndex = selectedId.images.length - 1;
     const [quantity, setQuantity] = useState(1);
-    const maxQuantity = 10;
+    const maxQuantity = selectedId.stock;
     const discountedPrice = getDiscountedPrice(selectedId.price, selectedId.discountPercentage).toFixed(2)
 
     const nextSlide = () => {
@@ -80,11 +80,11 @@ export function ProductDetail({ selectedId, handleAddToCart, addedProductId }) {
 
                 <div className="action-buttons">
                     <div className="quantity-picker">
-                        <button className="quantity-btn" onClick={handleDecrement}>-</button>
+                        <button className="quantity-btn" disabled={quantity <= 1} onClick={handleDecrement}>-</button>
                         <div className="quantity-box">
                             <input className="quantity-input" type="number" value={quantity} readOnly />
                         </div>
-                        <button className="quantity-btn" onClick={handleIncrement}>+</button>
+                        <button className="quantity-btn" disabled={quantity >= maxQuantity} onClick={handleIncrement}>+</button>
                     </div>
                     {addedProductId === selectedId.id && <p className="added-to-cart"> Added to cart!</p>}
                     <button className="cart-btn" onClick={(e) => handleAddToCart(e, selectedId, quantity)}>Add to cart</button>

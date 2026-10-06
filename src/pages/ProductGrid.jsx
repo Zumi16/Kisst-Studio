@@ -27,12 +27,12 @@ export function ProductGrid({ loading, error, selectedId, setSelected, cart, set
             if (isExisting) {
                 return cartItem.map((item) =>
                     item.id === cartProduct.id
-                        ? { ...item, quantity: item.quantity + quantity }
+                        ? { ...item, quantity: Math.min(item.quantity + quantity, item.stock) }
                         : item
                 );
             }
 
-            return [...cartItem, { ...cartProduct, quantity: quantity }]
+            return [...cartItem, { ...cartProduct, quantity: Math.min(quantity, cartProduct.stock) }]
         })
 
         setAddedProductId(cartProduct.id)

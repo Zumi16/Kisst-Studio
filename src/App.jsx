@@ -14,7 +14,7 @@ function App() {
   const [selectedId, setSelected] = useState(null);
   const [selectedCategories, setSelectedCategories] = useState("all");
   const [sortBy, setSortBy] = useState("featured")
-  const [maxPrice, setMaxPrice] = useState();
+  const [maxPrice, setMaxPrice] = useState(0);
   const [search, setSearch] = useState("");
   const [isInStock, setIsInStock] = useState(false);
 
@@ -22,7 +22,7 @@ function App() {
     Math.max ( 0, ...products.map((product) => product.price))
   );
 
-  const sortOptions = ["featured", "price-asc", "price-desc", "name-asc"]
+  const sortOptions = ["featured", "price-asc", "price-desc", "rating-desc", "name-asc"]
   //const categories = ["all", ...new Set(products.map((p) => p.category))]
 
   const finalPrice = (product) => getDiscountedPrice(product.price, product.discountPercentage);
@@ -41,6 +41,7 @@ function App() {
     }).sort((a, b) => {
       if (sortBy === "price-asc") return finalPrice(a) - finalPrice(b);
       if (sortBy === "price-desc") return finalPrice(b) - finalPrice(a);
+      if (sortBy === "rating-desc") return b.rating - a.rating;
       if (sortBy === "name-asc") return a.title.localeCompare(b.title);
       return 0;
     });
@@ -51,12 +52,19 @@ function App() {
       setLoading(true);
 
       try {
-        const { productData, productTotal } = await getProducts();
-        const { productCategories } = await getCategories(controller.signal);
+        const [{ productData, productTotal }, { productCategories }] = await Promise.all([
+          getProducts(controller.signal),
+          getCategories(controller.signal),
+        ]);
+
+        const nextHighestPrice = Math.ceil(
+          Math.max(0, ...productData.map((product) => product.price))
+        );
 
         setProducts(productData);
         setTotal(productTotal);
         setCategories(productCategories);
+        setMaxPrice(nextHighestPrice);
       } catch (error) {
         if (!axios.isCancel(error)) {
           setError(error.message)
